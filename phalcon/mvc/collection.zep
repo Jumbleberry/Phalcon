@@ -345,7 +345,7 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 	 * @param \Phalcon\Mvc\Collection collection
 	 * @param \MongoDb connection
 	 * @param boolean unique
-	 * @return array
+	 * @return array|boolean
 	 */
 	protected static function _getResultset(var params, <CollectionInterface> collection, connection, boolean unique)
 	{
@@ -1315,7 +1315,7 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 	 * echo "The robot id is ", $robot->_id, "\n";
 	 * </code>
 	 */
-	public static function findFirst(array parameters = null) -> array
+	public static function findFirst(array parameters = null) -> array | boolean
 	{
 		var className, collection, connection;
 

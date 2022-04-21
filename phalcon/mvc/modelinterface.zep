@@ -150,7 +150,7 @@ interface ModelInterface
 	 * Allows to query the first record that match the specified conditions
 	 *
 	 * @param array parameters
-	 * @return static
+	 * @return static|boolean
 	 */
 	public static function findFirst(parameters = null);
 

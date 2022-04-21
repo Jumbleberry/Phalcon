@@ -945,7 +945,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 	 * $doesFindTheRobotNow = Robot::findFirst(['name' => 'test']);
 	 * </code>
 	 */
-	public static function findFirst(var parameters = null) -> <Model>
+	public static function findFirst(var parameters = null) -> <Model> | boolean
 	{
 		var params, query;
 
