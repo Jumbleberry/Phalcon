@@ -69,7 +69,7 @@ class Cookie implements CookieInterface, InjectionAwareInterface
 	 * Phalcon\Http\Cookie constructor.
 	 */
 	public function __construct(
-		string! name,
+		string name,
 		var value = null,
 		int expire = 0,
 		string path = "/",

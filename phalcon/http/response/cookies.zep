@@ -244,7 +244,7 @@ class Cookies implements CookiesInterface, InjectionAwareInterface
 	/**
 	 * Gets a cookie from the bag
 	 */
-	public function get(string! name) -> <\Phalcon\Http\Response\CookiesInterface>
+	public function get(string name) -> <CookieInterface>
 	{
 		var dependencyInjector, encryption, cookie;
 
