@@ -64,7 +64,7 @@ class PhalconFixPathOptimizer extends OptimizerAbstract
 		$symbolVariable->setDynamicTypes('array');
 
 		$resolvedParams = $call->getReadOnlyResolvedParams($expression['parameters'], $context, $expression);
-		//$context->codePrinter->output('zephir_fast_array_merge(' . $symbolVariable->getName() . ', &(' . $resolvedParams[0] . '), &(' . $resolvedParams[1] . ') TSRMLS_CC);');
+		//$context->codePrinter->output('zephir_fast_array_merge(' . $symbolVariable->getName() . ', &(' . $resolvedParams[0] . '), &(' . $resolvedParams[1] . '));');
 		return new CompiledExpression('variable', $symbolVariable->getRealName(), $expression);
 	}
 

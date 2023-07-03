@@ -138,7 +138,7 @@ abstract class Injectable implements InjectionAwareInterface, EventsAwareInterfa
 		}
 
 		if propertyName == "di" {
-			let this->{"di"} = dependencyInjector;
+			// let this->{"di"} = dependencyInjector;
 			return dependencyInjector;
 		}
 

@@ -4236,7 +4236,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 		/**
 		 * Call the 'getRelationRecords' in the models manager
 		 */
-		return manager->getRelationRecords(relation, null, this, arguments);
+		return manager->getRelationRecords(relation, this, null, arguments);
 	}
 
 	/**
@@ -4282,8 +4282,8 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 
 		return manager->getRelationRecords(
 			relation,
-			queryMethod,
 			this,
+			queryMethod,
 			extraArgs
 		);
 	}
@@ -4571,7 +4571,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			/**
 			 * Get the related records
 			 */
-			let result = manager->getRelationRecords(relation, null, this, null);
+			let result = manager->getRelationRecords(relation, this, null, null);
 
 			/**
 			 * Assign the result to the object

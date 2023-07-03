@@ -316,7 +316,7 @@ abstract class Dialect implements DialectInterface
 			 * Resolve function calls
 			 */
 			case "functionCall":
-				return this->getSqlExpressionFunctionCall(expression, escapeChar, bindCounts);
+				return this->getSqlExpressionFunctionCall(expression, bindCounts, escapeChar);
 
 			/**
 			 * Resolve lists
@@ -620,7 +620,7 @@ abstract class Dialect implements DialectInterface
 	/**
 	 * Resolve function calls
 	 */
-	protected final function getSqlExpressionFunctionCall(array! expression, string escapeChar = null, bindCounts) -> string
+	protected final function getSqlExpressionFunctionCall(array! expression, bindCounts, string escapeChar = null) -> string
 	{
 		var name, customFunction, arguments;
 

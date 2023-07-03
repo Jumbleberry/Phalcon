@@ -1244,7 +1244,7 @@ class Manager implements ManagerInterface, InjectionAwareInterface, EventsAwareI
 	 *
 	 * @return \Phalcon\Mvc\Model\Resultset\Simple|Phalcon\Mvc\Model\Resultset\Simple|int|false
 	 */
-	public function getRelationRecords(<RelationInterface> relation, string method = null, <ModelInterface> record, var parameters = null)
+	public function getRelationRecords(<RelationInterface> relation, <ModelInterface> record, string method = null, var parameters = null)
 	{
 		var placeholders, referencedModel, intermediateModel,
 			intermediateFields, joinConditions, fields, builder, extraParameters,
@@ -1466,7 +1466,7 @@ class Manager implements ManagerInterface, InjectionAwareInterface, EventsAwareI
 		 * "relations" is an array with all the belongsTo relationships to that model
 		 * Perform the query
 		 */
-		return this->getRelationRecords(relations[0], method, record, parameters);
+		return this->getRelationRecords(relations[0], record, method, parameters);
 	}
 
 	/**
@@ -1489,7 +1489,7 @@ class Manager implements ManagerInterface, InjectionAwareInterface, EventsAwareI
 		 * "relations" is an array with all the hasMany relationships to that model
 		 * Perform the query
 		 */
-		return this->getRelationRecords(relations[0], method, record, parameters);
+		return this->getRelationRecords(relations[0], record, method, parameters);
 	}
 
 	/**
@@ -1512,7 +1512,7 @@ class Manager implements ManagerInterface, InjectionAwareInterface, EventsAwareI
 		 * "relations" is an array with all the belongsTo relationships to that model
 		 * Perform the query
 		 */
-		return this->getRelationRecords(relations[0], method, record, parameters);
+		return this->getRelationRecords(relations[0], record, method, parameters);
 	}
 
 	/**
