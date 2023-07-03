@@ -17,41 +17,34 @@
  *
  * Interface for Phalcon\Http\Response\Headers compatible bags
  */
-ZEPHIR_INIT_CLASS(Phalcon_Http_Response_HeadersInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Http_Response_HeadersInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Http\\Response, HeadersInterface, phalcon, http_response_headersinterface, phalcon_http_response_headersinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
  * Sets a header to be sent at the end of the request
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, set);
-
 /**
  * Gets a header value from the internal bag
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, get);
-
 /**
  * Sets a raw header to be sent at the end of the request
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, setRaw);
-
 /**
  * Sends the headers to the client
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, send);
-
 /**
  * Reset set headers
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, reset);
-
 /**
  * Restore a \Phalcon\Http\Response\Headers object
  */
 ZEPHIR_DOC_METHOD(Phalcon_Http_Response_HeadersInterface, __set_state);
-

@@ -19,11 +19,10 @@
  *
  * Exceptions thrown in Phalcon\Mvc\Url will use this class
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_Url_Exception) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_Url_Exception)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Mvc\\Url, Exception, phalcon, mvc_url_exception, phalcon_exception_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 

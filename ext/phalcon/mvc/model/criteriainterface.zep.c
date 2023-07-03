@@ -17,51 +17,43 @@
  *
  * Interface for Phalcon\Mvc\Model\Criteria
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_CriteriaInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_CriteriaInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Mvc\\Model, CriteriaInterface, phalcon, mvc_model_criteriainterface, phalcon_mvc_model_criteriainterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
  * Set a model on which the query will be executed
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, setModelName);
-
 /**
  * Returns an internal model name on which the criteria will be applied
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getModelName);
-
 /**
  * Sets the bound parameters in the criteria
  * This method replaces all previously set bound parameters
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, bind);
-
 /**
  * Sets the bind types in the criteria
  * This method replaces all previously set bound parameters
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, bindTypes);
-
 /**
  * Sets the conditions parameter in the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, where);
-
 /**
  * Adds the conditions parameter to the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, conditions);
-
 /**
  * Adds the order-by parameter to the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, orderBy);
-
 /**
  * Sets the limit parameter to the criteria
  *
@@ -70,17 +62,14 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, orderBy);
  * @return \Phalcon\Mvc\Model\CriteriaInterface
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, limit);
-
 /**
  * Sets the "for_update" parameter to the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, forUpdate);
-
 /**
  * Sets the "shared_lock" parameter to the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, sharedLock);
-
 /**
  * Appends a condition to the current conditions using an AND operator
  *
@@ -90,7 +79,6 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, sharedLock);
  * @return \Phalcon\Mvc\Model\CriteriaInterface
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, andWhere);
-
 /**
  * Appends a condition to the current conditions using an OR operator
  *
@@ -100,7 +88,6 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, andWhere);
  * @return \Phalcon\Mvc\Model\CriteriaInterface
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, orWhere);
-
 /**
  * Appends a BETWEEN condition to the current conditions
  *
@@ -114,7 +101,6 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, orWhere);
  * @return \Phalcon\Mvc\Model\CriteriaInterface
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, betweenWhere);
-
 /**
  * Appends a NOT BETWEEN condition to the current conditions
  *
@@ -128,7 +114,6 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, betweenWhere);
  * @return \Phalcon\Mvc\Model\CriteriaInterface
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, notBetweenWhere);
-
 /**
  * Appends an IN condition to the current conditions
  *
@@ -137,7 +122,6 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, notBetweenWhere);
  *</code>
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, inWhere);
-
 /**
  * Appends a NOT IN condition to the current conditions
  *
@@ -146,21 +130,18 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, inWhere);
  *</code>
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, notInWhere);
-
 /**
  * Returns the conditions parameter in the criteria
  *
  * @return string|null
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getWhere);
-
 /**
  * Returns the conditions parameter in the criteria
  *
  * @return string|null
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getConditions);
-
 /**
  * Returns the limit parameter in the criteria, which will be
  * an integer if limit was set without an offset,
@@ -170,23 +151,19 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getConditions);
  * @return int|array|null
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getLimit);
-
 /**
  * Returns the order parameter in the criteria
  *
  * @return string|null
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getOrderBy);
-
 /**
  * Returns all the parameters defined in the criteria
  *
  * @return array
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, getParams);
-
 /**
  * Executes a find using the parameters built with the criteria
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_CriteriaInterface, execute);
-

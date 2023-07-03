@@ -17,55 +17,46 @@
  *
  * Interface for Phalcon\Validation\Message
  */
-ZEPHIR_INIT_CLASS(Phalcon_Validation_MessageInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Validation_MessageInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Validation, MessageInterface, phalcon, validation_messageinterface, phalcon_validation_messageinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
  * Sets message type
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, setType);
-
 /**
  * Returns message type
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, getType);
-
 /**
  * Sets verbose message
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, setMessage);
-
 /**
  * Returns verbose message
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, getMessage);
-
 /**
  * Sets field name related to message
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, setField);
-
 /**
  * Returns field name related to message
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, getField);
-
 /**
  * Magic __toString method returns verbose message
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, __toString);
-
 /**
  * Magic __set_state helps to recover messages from serialization
  */
 ZEPHIR_DOC_METHOD(Phalcon_Validation_MessageInterface, __set_state);
-

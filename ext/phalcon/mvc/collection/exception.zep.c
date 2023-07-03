@@ -20,11 +20,10 @@
  * Exceptions thrown in Phalcon\Mvc\Collection\* classes will use this class
  *
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_Collection_Exception) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_Collection_Exception)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Mvc\\Collection, Exception, phalcon, mvc_collection_exception, phalcon_exception_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 

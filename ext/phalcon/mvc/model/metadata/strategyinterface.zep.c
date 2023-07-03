@@ -12,12 +12,11 @@
 #include "kernel/main.h"
 
 
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_MetaData_StrategyInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_MetaData_StrategyInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Mvc\\Model\\MetaData, StrategyInterface, phalcon, mvc_model_metadata_strategyinterface, phalcon_mvc_model_metadata_strategyinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
@@ -28,7 +27,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_MetaData_StrategyInterface) {
  * @return array
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_MetaData_StrategyInterface, getMetaData);
-
 /**
  * Read the model's column map, this can't be inferred
  *
@@ -38,4 +36,3 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_MetaData_StrategyInterface, getMetaData);
  * @todo Not implemented
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_MetaData_StrategyInterface, getColumnMaps);
-

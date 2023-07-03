@@ -20,11 +20,10 @@
  * This class can be used to provide user modules easy access to services
  * in the application
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_User_Module) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_User_Module)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Mvc\\User, Module, phalcon, mvc_user_module, phalcon_di_injectable_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 

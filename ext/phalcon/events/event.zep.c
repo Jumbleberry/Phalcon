@@ -24,8 +24,8 @@
  *
  * This class offers contextual information of a fired event in the EventsManager
  */
-ZEPHIR_INIT_CLASS(Phalcon_Events_Event) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Events_Event)
+{
 	ZEPHIR_REGISTER_CLASS(Phalcon\\Events, Event, phalcon, events_event, phalcon_events_event_method_entry, 0);
 
 	/**
@@ -33,72 +33,69 @@ ZEPHIR_INIT_CLASS(Phalcon_Events_Event) {
 	 *
 	 * @var string
 	 */
-	zend_declare_property_null(phalcon_events_event_ce, SL("_type"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
+	zend_declare_property_null(phalcon_events_event_ce, SL("_type"), ZEND_ACC_PROTECTED);
 	/**
 	 * Event source
 	 *
 	 * @var object
 	 */
-	zend_declare_property_null(phalcon_events_event_ce, SL("_source"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
+	zend_declare_property_null(phalcon_events_event_ce, SL("_source"), ZEND_ACC_PROTECTED);
 	/**
 	 * Event data
 	 *
 	 * @var mixed
 	 */
-	zend_declare_property_null(phalcon_events_event_ce, SL("_data"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
+	zend_declare_property_null(phalcon_events_event_ce, SL("_data"), ZEND_ACC_PROTECTED);
 	/**
 	 * Is event propagation stopped?
 	 *
 	 * @var boolean
 	 */
-	zend_declare_property_bool(phalcon_events_event_ce, SL("_stopped"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
-
+	zend_declare_property_bool(phalcon_events_event_ce, SL("_stopped"), 0, ZEND_ACC_PROTECTED);
 	/**
 	 * Is event cancelable?
 	 *
 	 * @var boolean
 	 */
-	zend_declare_property_bool(phalcon_events_event_ce, SL("_cancelable"), 1, ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	zend_class_implements(phalcon_events_event_ce TSRMLS_CC, 1, phalcon_events_eventinterface_ce);
+	zend_declare_property_bool(phalcon_events_event_ce, SL("_cancelable"), 1, ZEND_ACC_PROTECTED);
+	zend_class_implements(phalcon_events_event_ce, 1, phalcon_events_eventinterface_ce);
 	return SUCCESS;
-
 }
 
 /**
  * Event type
  */
-PHP_METHOD(Phalcon_Events_Event, getType) {
+PHP_METHOD(Phalcon_Events_Event, getType)
+{
+	zval *this_ptr = getThis();
 
-	
+
 
 	RETURN_MEMBER(getThis(), "_type");
-
 }
 
 /**
  * Event source
  */
-PHP_METHOD(Phalcon_Events_Event, getSource) {
+PHP_METHOD(Phalcon_Events_Event, getSource)
+{
+	zval *this_ptr = getThis();
 
-	
+
 
 	RETURN_MEMBER(getThis(), "_source");
-
 }
 
 /**
  * Event data
  */
-PHP_METHOD(Phalcon_Events_Event, getData) {
+PHP_METHOD(Phalcon_Events_Event, getData)
+{
+	zval *this_ptr = getThis();
 
-	
+
 
 	RETURN_MEMBER(getThis(), "_data");
-
 }
 
 /**
@@ -109,27 +106,46 @@ PHP_METHOD(Phalcon_Events_Event, getData) {
  * @param mixed data
  * @param boolean cancelable
  */
-PHP_METHOD(Phalcon_Events_Event, __construct) {
-
+PHP_METHOD(Phalcon_Events_Event, __construct)
+{
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_bool cancelable;
-	zval *type_param = NULL, *source, *data = NULL, *cancelable_param = NULL;
-	zval *type = NULL;
+	zval *type_param = NULL, *source, source_sub, *data = NULL, data_sub, *cancelable_param = NULL, __$true, __$false, __$null;
+	zval type;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&type);
+	ZVAL_UNDEF(&source_sub);
+	ZVAL_UNDEF(&data_sub);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
+	ZVAL_NULL(&__$null);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(2, 4)
+		Z_PARAM_STR(type)
+		Z_PARAM_ZVAL(source)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_ZVAL_OR_NULL(data)
+		Z_PARAM_BOOL(cancelable)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 2, &type_param, &source, &data, &cancelable_param);
-
 	if (UNEXPECTED(Z_TYPE_P(type_param) != IS_STRING && Z_TYPE_P(type_param) != IS_NULL)) {
-		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'type' must be a string") TSRMLS_CC);
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'type' must be of the type string"));
 		RETURN_MM_NULL();
 	}
 	if (EXPECTED(Z_TYPE_P(type_param) == IS_STRING)) {
-		zephir_get_strval(type, type_param);
+		zephir_get_strval(&type, type_param);
 	} else {
-		ZEPHIR_INIT_VAR(type);
-		ZVAL_EMPTY_STRING(type);
+		ZEPHIR_INIT_VAR(&type);
 	}
 	if (!data) {
-		data = ZEPHIR_GLOBAL(global_null);
+		data = &data_sub;
+		data = &__$null;
 	}
 	if (!cancelable_param) {
 		cancelable = 1;
@@ -138,68 +154,86 @@ PHP_METHOD(Phalcon_Events_Event, __construct) {
 	}
 
 
-	zephir_update_property_this(getThis(), SL("_type"), type TSRMLS_CC);
-	zephir_update_property_this(getThis(), SL("_source"), source TSRMLS_CC);
+	zephir_update_property_zval(this_ptr, ZEND_STRL("_type"), &type);
+	zephir_update_property_zval(this_ptr, ZEND_STRL("_source"), source);
 	if (Z_TYPE_P(data) != IS_NULL) {
-		zephir_update_property_this(getThis(), SL("_data"), data TSRMLS_CC);
+		zephir_update_property_zval(this_ptr, ZEND_STRL("_data"), data);
 	}
 	if (cancelable != 1) {
 		if (cancelable) {
-			zephir_update_property_this(getThis(), SL("_cancelable"), ZEPHIR_GLOBAL(global_true) TSRMLS_CC);
+			zephir_update_property_zval(this_ptr, ZEND_STRL("_cancelable"), &__$true);
 		} else {
-			zephir_update_property_this(getThis(), SL("_cancelable"), ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
+			zephir_update_property_zval(this_ptr, ZEND_STRL("_cancelable"), &__$false);
 		}
 	}
 	ZEPHIR_MM_RESTORE();
-
 }
 
 /**
  * Sets event data.
  * @param mixed data
  */
-PHP_METHOD(Phalcon_Events_Event, setData) {
+PHP_METHOD(Phalcon_Events_Event, setData)
+{
+	zval *data = NULL, data_sub, __$null;
+	zval *this_ptr = getThis();
 
-	zval *data = NULL;
+	ZVAL_UNDEF(&data_sub);
+	ZVAL_NULL(&__$null);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(0, 1)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_ZVAL_OR_NULL(data)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
 
-	zephir_fetch_params(0, 0, 1, &data);
 
+	zephir_fetch_params_without_memory_grow(0, 1, &data);
 	if (!data) {
-		data = ZEPHIR_GLOBAL(global_null);
+		data = &data_sub;
+		data = &__$null;
 	}
 
 
-	zephir_update_property_this(getThis(), SL("_data"), data TSRMLS_CC);
+	zephir_update_property_zval(this_ptr, ZEND_STRL("_data"), data);
 	RETURN_THISW();
-
 }
 
 /**
  * Sets event type.
  */
-PHP_METHOD(Phalcon_Events_Event, setType) {
-
+PHP_METHOD(Phalcon_Events_Event, setType)
+{
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zval *type_param = NULL;
-	zval *type = NULL;
+	zval type;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&type);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_STR(type)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &type_param);
-
 	if (UNEXPECTED(Z_TYPE_P(type_param) != IS_STRING && Z_TYPE_P(type_param) != IS_NULL)) {
-		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'type' must be a string") TSRMLS_CC);
+		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'type' must be of the type string"));
 		RETURN_MM_NULL();
 	}
 	if (EXPECTED(Z_TYPE_P(type_param) == IS_STRING)) {
-		zephir_get_strval(type, type_param);
+		zephir_get_strval(&type, type_param);
 	} else {
-		ZEPHIR_INIT_VAR(type);
-		ZVAL_EMPTY_STRING(type);
+		ZEPHIR_INIT_VAR(&type);
 	}
 
 
-	zephir_update_property_this(getThis(), SL("_type"), type TSRMLS_CC);
+	zephir_update_property_zval(this_ptr, ZEND_STRL("_type"), &type);
 	RETURN_THIS();
-
 }
 
 /**
@@ -211,34 +245,40 @@ PHP_METHOD(Phalcon_Events_Event, setType) {
  * }
  * </code>
  */
-PHP_METHOD(Phalcon_Events_Event, stop) {
+PHP_METHOD(Phalcon_Events_Event, stop)
+{
+	zval __$true, __$false, _0;
+	zval *this_ptr = getThis();
 
-	zval *_0;
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
+	ZVAL_UNDEF(&_0);
 
 
-	_0 = zephir_fetch_nproperty_this(this_ptr, SL("_cancelable"), PH_NOISY_CC);
-	if (!(zephir_is_true(_0))) {
+
+	zephir_read_property(&_0, this_ptr, ZEND_STRL("_cancelable"), PH_NOISY_CC | PH_READONLY);
+	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_events_exception_ce, "Trying to cancel a non-cancelable event", "phalcon/events/event.zep", 119);
 		return;
 	}
 	if (1) {
-		zephir_update_property_this(getThis(), SL("_stopped"), ZEPHIR_GLOBAL(global_true) TSRMLS_CC);
+		zephir_update_property_zval(this_ptr, ZEND_STRL("_stopped"), &__$true);
 	} else {
-		zephir_update_property_this(getThis(), SL("_stopped"), ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
+		zephir_update_property_zval(this_ptr, ZEND_STRL("_stopped"), &__$false);
 	}
 	RETURN_THISW();
-
 }
 
 /**
  * Check whether the event is currently stopped.
  */
-PHP_METHOD(Phalcon_Events_Event, isStopped) {
+PHP_METHOD(Phalcon_Events_Event, isStopped)
+{
+	zval *this_ptr = getThis();
 
-	
+
 
 	RETURN_MEMBER(getThis(), "_stopped");
-
 }
 
 /**
@@ -250,11 +290,12 @@ PHP_METHOD(Phalcon_Events_Event, isStopped) {
  * }
  * </code>
  */
-PHP_METHOD(Phalcon_Events_Event, isCancelable) {
+PHP_METHOD(Phalcon_Events_Event, isCancelable)
+{
+	zval *this_ptr = getThis();
 
-	
+
 
 	RETURN_MEMBER(getThis(), "_cancelable");
-
 }
 

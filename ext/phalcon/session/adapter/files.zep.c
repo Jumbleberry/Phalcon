@@ -35,11 +35,10 @@
  * echo $session->get("var");
  * </code>
  */
-ZEPHIR_INIT_CLASS(Phalcon_Session_Adapter_Files) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Session_Adapter_Files)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Session\\Adapter, Files, phalcon, session_adapter_files, phalcon_session_adapter_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 
