@@ -508,7 +508,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, toArray)
 /**
  * Serializing a resultset will dump all related rows into a big array
  */
-PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, serialize)
+PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, __serialize)
 {
 	zval _0;
 	zval records, cache, columnTypes, hydrateMode, serialized;
@@ -548,7 +548,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, serialize)
 /**
  * Unserializing a resultset will allow to only works on the rows present in the saved state
  */
-PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, unserialize)
+PHP_METHOD(Phalcon_Mvc_Model_Resultset_Complex, __unserialize)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;

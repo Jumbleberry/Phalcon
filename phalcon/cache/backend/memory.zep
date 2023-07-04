@@ -43,7 +43,7 @@ use Phalcon\Cache\Exception;
  * $data = $cache->get("my-data");
  *</code>
  */
-class Memory extends Backend implements \Serializable
+class Memory extends Backend
 {
 
 	protected _data;
@@ -276,7 +276,7 @@ class Memory extends Backend implements \Serializable
 	/**
 	 * Required for interface \Serializable
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		return serialize([
 			"frontend": this->_frontend
@@ -286,7 +286,7 @@ class Memory extends Backend implements \Serializable
 	/**
 	 * Required for interface \Serializable
 	 */
-	public function unserialize(var data)
+	public function __unserialize(var data)
 	{
 		var unserialized;
 

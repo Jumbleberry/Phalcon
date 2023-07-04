@@ -48,7 +48,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Cache_Backend_Memory)
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Cache\\Backend, Memory, phalcon, cache_backend_memory, phalcon_cache_backend_ce, phalcon_cache_backend_memory_method_entry, 0);
 
 	zend_declare_property_null(phalcon_cache_backend_memory_ce, SL("_data"), ZEND_ACC_PROTECTED);
-	zend_class_implements(phalcon_cache_backend_memory_ce, 1, zend_ce_serializable);
 	return SUCCESS;
 }
 
@@ -566,7 +565,7 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, flush)
 /**
  * Required for interface \Serializable
  */
-PHP_METHOD(Phalcon_Cache_Backend_Memory, serialize)
+PHP_METHOD(Phalcon_Cache_Backend_Memory, __serialize)
 {
 	zval _1;
 	zval _0;
@@ -593,7 +592,7 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, serialize)
 /**
  * Required for interface \Serializable
  */
-PHP_METHOD(Phalcon_Cache_Backend_Memory, unserialize)
+PHP_METHOD(Phalcon_Cache_Backend_Memory, __unserialize)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;

@@ -98,7 +98,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model)
 	zend_class_implements(phalcon_mvc_model_ce, 1, phalcon_mvc_modelinterface_ce);
 	zend_class_implements(phalcon_mvc_model_ce, 1, phalcon_mvc_model_resultinterface_ce);
 	zend_class_implements(phalcon_mvc_model_ce, 1, phalcon_di_injectionawareinterface_ce);
-	zend_class_implements(phalcon_mvc_model_ce, 1, zend_ce_serializable);
 	zend_class_implements(phalcon_mvc_model_ce, 1, php_json_serializable_ce);
 	return SUCCESS;
 }
@@ -9830,7 +9829,7 @@ PHP_METHOD(Phalcon_Mvc_Model, __isset)
 /**
  * Serializes the object ignoring connections, services, related objects or static properties
  */
-PHP_METHOD(Phalcon_Mvc_Model, serialize)
+PHP_METHOD(Phalcon_Mvc_Model, __serialize)
 {
 	zval _2$$4;
 	zend_bool _1$$3;
@@ -9880,7 +9879,7 @@ PHP_METHOD(Phalcon_Mvc_Model, serialize)
 /**
  * Unserializes the object from a serialized string
  */
-PHP_METHOD(Phalcon_Mvc_Model, unserialize)
+PHP_METHOD(Phalcon_Mvc_Model, __unserialize)
 {
 	zend_string *_7$$3;
 	zend_ulong _6$$3;

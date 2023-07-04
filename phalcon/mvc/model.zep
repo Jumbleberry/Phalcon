@@ -83,7 +83,7 @@ use Phalcon\Events\ManagerInterface as EventsManagerInterface;
  * }
  * </code>
  */
-abstract class Model implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \Serializable, \JsonSerializable
+abstract class Model implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \JsonSerializable
 {
 	protected _dependencyInjector;
 
@@ -4630,7 +4630,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 	/**
 	 * Serializes the object ignoring connections, services, related objects or static properties
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		/**
 		 * Use the standard serialize function to serialize the array data
@@ -4656,7 +4656,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function unserialize(var data)
+	public function __unserialize(var data)
 	{
 		var attributes, dependencyInjector, manager, key, value, snapshot;
 

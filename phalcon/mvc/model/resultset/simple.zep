@@ -225,7 +225,7 @@ class Simple extends Resultset
 	/**
 	 * Serializing a resultset will dump all related rows into a big array
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		/**
 		 * Serialize the cache using the serialize function
@@ -243,7 +243,7 @@ class Simple extends Resultset
 	/**
 	 * Unserializing a resultset will allow to only works on the rows present in the saved state
 	 */
-	public function unserialize(var data) -> void
+	public function __unserialize(var data) -> void
 	{
 		var resultset, keepSnapshots;
 

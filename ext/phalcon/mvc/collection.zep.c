@@ -62,7 +62,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Collection)
 	zend_class_implements(phalcon_mvc_collection_ce, 1, phalcon_mvc_entityinterface_ce);
 	zend_class_implements(phalcon_mvc_collection_ce, 1, phalcon_mvc_collectioninterface_ce);
 	zend_class_implements(phalcon_mvc_collection_ce, 1, phalcon_di_injectionawareinterface_ce);
-	zend_class_implements(phalcon_mvc_collection_ce, 1, zend_ce_serializable);
 	return SUCCESS;
 }
 
@@ -2975,7 +2974,7 @@ PHP_METHOD(Phalcon_Mvc_Collection, toArray)
 /**
  * Serializes the object ignoring connections or protected properties
  */
-PHP_METHOD(Phalcon_Mvc_Collection, serialize)
+PHP_METHOD(Phalcon_Mvc_Collection, __serialize)
 {
 	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
@@ -2997,7 +2996,7 @@ PHP_METHOD(Phalcon_Mvc_Collection, serialize)
 /**
  * Unserializes the object from a serialized string
  */
-PHP_METHOD(Phalcon_Mvc_Collection, unserialize)
+PHP_METHOD(Phalcon_Mvc_Collection, __unserialize)
 {
 	zend_string *_5$$3;
 	zend_ulong _4$$3;

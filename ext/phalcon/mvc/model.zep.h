@@ -94,8 +94,8 @@ PHP_METHOD(Phalcon_Mvc_Model, __set);
 PHP_METHOD(Phalcon_Mvc_Model, _possibleSetter);
 PHP_METHOD(Phalcon_Mvc_Model, __get);
 PHP_METHOD(Phalcon_Mvc_Model, __isset);
-PHP_METHOD(Phalcon_Mvc_Model, serialize);
-PHP_METHOD(Phalcon_Mvc_Model, unserialize);
+PHP_METHOD(Phalcon_Mvc_Model, __serialize);
+PHP_METHOD(Phalcon_Mvc_Model, __unserialize);
 PHP_METHOD(Phalcon_Mvc_Model, dump);
 PHP_METHOD(Phalcon_Mvc_Model, toArray);
 PHP_METHOD(Phalcon_Mvc_Model, jsonSerialize);
@@ -505,18 +505,12 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model___isset, 0, 1,
 	ZEND_ARG_TYPE_INFO(0, property, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model_serialize, 0, 0, IS_STRING, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model___serialize, 0, 0, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
 
-#if PHP_VERSION_ID >= 80000
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model_unserialize, 0, 1, IS_VOID, 0)
-    ZEND_ARG_TYPE_INFO(0, serialized, IS_STRING, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_mvc_model___unserialize, 0, 0, 1)
+	ZEND_ARG_INFO(0, data)
 ZEND_END_ARG_INFO()
-#else
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model_unserialize, 0, 1, IS_VOID, 0)
-    ZEND_ARG_INFO(0, serialized)
-ZEND_END_ARG_INFO()
-#endif
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_model_dump, 0, 0, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
@@ -640,8 +634,8 @@ ZEPHIR_INIT_FUNCS(phalcon_mvc_model_method_entry) {
 	PHP_ME(Phalcon_Mvc_Model, _possibleSetter, arginfo_phalcon_mvc_model__possiblesetter, ZEND_ACC_PROTECTED|ZEND_ACC_FINAL)
 	PHP_ME(Phalcon_Mvc_Model, __get, arginfo_phalcon_mvc_model___get, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Model, __isset, arginfo_phalcon_mvc_model___isset, ZEND_ACC_PUBLIC)
-	PHP_ME(Phalcon_Mvc_Model, serialize, arginfo_phalcon_mvc_model_serialize, ZEND_ACC_PUBLIC)
-	PHP_ME(Phalcon_Mvc_Model, unserialize, arginfo_phalcon_mvc_model_unserialize, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Mvc_Model, __serialize, arginfo_phalcon_mvc_model___serialize, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Mvc_Model, __unserialize, arginfo_phalcon_mvc_model___unserialize, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Model, dump, arginfo_phalcon_mvc_model_dump, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Model, toArray, arginfo_phalcon_mvc_model_toarray, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Model, jsonSerialize, arginfo_phalcon_mvc_model_jsonserialize, ZEND_ACC_PUBLIC)
