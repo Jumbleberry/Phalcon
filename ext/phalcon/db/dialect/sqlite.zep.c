@@ -251,7 +251,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, getColumnDefinition)
 						ZVAL_COPY(&value$$41, _12$$41);
 						ZEPHIR_INIT_NVAR(&_14$$42);
 						ZVAL_STRING(&_14$$42, "\"");
-						ZEPHIR_CALL_FUNCTION(&_15$$42, "addcslashes", &_16, 155, &value$$41, &_14$$42);
+						ZEPHIR_CALL_FUNCTION(&_15$$42, "addcslashes", &_16, 160, &value$$41, &_14$$42);
 						zephir_check_call_status();
 						ZEPHIR_INIT_NVAR(&_17$$42);
 						ZEPHIR_CONCAT_SVS(&_17$$42, "\"", &_15$$42, "\", ");
@@ -270,7 +270,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, getColumnDefinition)
 						zephir_check_call_status();
 							ZEPHIR_INIT_NVAR(&_18$$43);
 							ZVAL_STRING(&_18$$43, "\"");
-							ZEPHIR_CALL_FUNCTION(&_19$$43, "addcslashes", &_16, 155, &value$$41, &_18$$43);
+							ZEPHIR_CALL_FUNCTION(&_19$$43, "addcslashes", &_16, 160, &value$$41, &_18$$43);
 							zephir_check_call_status();
 							ZEPHIR_INIT_NVAR(&_20$$43);
 							ZEPHIR_CONCAT_SVS(&_20$$43, "\"", &_19$$43, "\", ");
@@ -290,7 +290,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, getColumnDefinition)
 			} else {
 				ZEPHIR_INIT_VAR(&_25$$44);
 				ZVAL_STRING(&_25$$44, "\"");
-				ZEPHIR_CALL_FUNCTION(&_26$$44, "addcslashes", &_16, 155, &typeValues, &_25$$44);
+				ZEPHIR_CALL_FUNCTION(&_26$$44, "addcslashes", &_16, 160, &typeValues, &_25$$44);
 				zephir_check_call_status();
 				ZEPHIR_INIT_VAR(&_27$$44);
 				ZEPHIR_CONCAT_SVS(&_27$$44, "(\"", &_26$$44, "\")");
@@ -384,7 +384,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, addColumn)
 		} else {
 			ZEPHIR_INIT_VAR(&_6$$5);
 			ZVAL_STRING(&_6$$5, "\"");
-			ZEPHIR_CALL_FUNCTION(&_7$$5, "addcslashes", NULL, 155, &defaultValue, &_6$$5);
+			ZEPHIR_CALL_FUNCTION(&_7$$5, "addcslashes", NULL, 160, &defaultValue, &_6$$5);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_8$$5);
 			ZEPHIR_CONCAT_SVS(&_8$$5, " DEFAULT \"", &_7$$5, "\"");
@@ -597,7 +597,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, addIndex)
 	}
 	ZEPHIR_CALL_METHOD(&_5, index, "getcolumns", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getcolumnlist", NULL, 50, &_5);
+	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getcolumnlist", NULL, 54, &_5);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_6);
 	ZEPHIR_CONCAT_VS(&_6, &_4, ")");
@@ -1059,7 +1059,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 				} else {
 					ZEPHIR_INIT_NVAR(&_11$$12);
 					ZVAL_STRING(&_11$$12, "\"");
-					ZEPHIR_CALL_FUNCTION(&_12$$12, "addcslashes", &_13, 155, &defaultValue, &_11$$12);
+					ZEPHIR_CALL_FUNCTION(&_12$$12, "addcslashes", &_13, 160, &defaultValue, &_11$$12);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_14$$12);
 					ZEPHIR_CONCAT_SVS(&_14$$12, " DEFAULT \"", &_12$$12, "\"");
@@ -1121,7 +1121,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 					} else {
 						ZEPHIR_INIT_NVAR(&_24$$19);
 						ZVAL_STRING(&_24$$19, "\"");
-						ZEPHIR_CALL_FUNCTION(&_25$$19, "addcslashes", &_13, 155, &defaultValue, &_24$$19);
+						ZEPHIR_CALL_FUNCTION(&_25$$19, "addcslashes", &_13, 160, &defaultValue, &_24$$19);
 						zephir_check_call_status();
 						ZEPHIR_INIT_NVAR(&_26$$19);
 						ZEPHIR_CONCAT_SVS(&_26$$19, " DEFAULT \"", &_25$$19, "\"");
@@ -1164,7 +1164,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 				if (_30$$22) {
 					ZEPHIR_CALL_METHOD(&_34$$23, &index, "getcolumns", NULL, 0);
 					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(&_33$$23, this_ptr, "getcolumnlist", &_35, 50, &_34$$23);
+					ZEPHIR_CALL_METHOD(&_33$$23, this_ptr, "getcolumnlist", &_35, 54, &_34$$23);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_36$$23);
 					ZEPHIR_CONCAT_SVS(&_36$$23, "PRIMARY KEY (", &_33$$23, ")");
@@ -1172,7 +1172,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 				} else if (_31$$22) {
 					ZEPHIR_CALL_METHOD(&_38$$24, &index, "getcolumns", NULL, 0);
 					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(&_37$$24, this_ptr, "getcolumnlist", &_35, 50, &_38$$24);
+					ZEPHIR_CALL_METHOD(&_37$$24, this_ptr, "getcolumnlist", &_35, 54, &_38$$24);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_39$$24);
 					ZEPHIR_CONCAT_SVS(&_39$$24, "UNIQUE (", &_37$$24, ")");
@@ -1207,7 +1207,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 					if (_40$$25) {
 						ZEPHIR_CALL_METHOD(&_44$$26, &index, "getcolumns", NULL, 0);
 						zephir_check_call_status();
-						ZEPHIR_CALL_METHOD(&_43$$26, this_ptr, "getcolumnlist", &_35, 50, &_44$$26);
+						ZEPHIR_CALL_METHOD(&_43$$26, this_ptr, "getcolumnlist", &_35, 54, &_44$$26);
 						zephir_check_call_status();
 						ZEPHIR_INIT_NVAR(&_45$$26);
 						ZEPHIR_CONCAT_SVS(&_45$$26, "PRIMARY KEY (", &_43$$26, ")");
@@ -1215,7 +1215,7 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 					} else if (_41$$25) {
 						ZEPHIR_CALL_METHOD(&_47$$27, &index, "getcolumns", NULL, 0);
 						zephir_check_call_status();
-						ZEPHIR_CALL_METHOD(&_46$$27, this_ptr, "getcolumnlist", &_35, 50, &_47$$27);
+						ZEPHIR_CALL_METHOD(&_46$$27, this_ptr, "getcolumnlist", &_35, 54, &_47$$27);
 						zephir_check_call_status();
 						ZEPHIR_INIT_NVAR(&_48$$27);
 						ZEPHIR_CONCAT_SVS(&_48$$27, "UNIQUE (", &_46$$27, ")");
@@ -1239,13 +1239,13 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(&_53$$29, &reference, "getcolumns", NULL, 0);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(&_52$$29, this_ptr, "getcolumnlist", &_35, 50, &_53$$29);
+				ZEPHIR_CALL_METHOD(&_52$$29, this_ptr, "getcolumnlist", &_35, 54, &_53$$29);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(&_54$$29, &reference, "getreferencedtable", NULL, 0);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(&_56$$29, &reference, "getreferencedcolumns", NULL, 0);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(&_55$$29, this_ptr, "getcolumnlist", &_35, 50, &_56$$29);
+				ZEPHIR_CALL_METHOD(&_55$$29, this_ptr, "getcolumnlist", &_35, 54, &_56$$29);
 				zephir_check_call_status();
 				ZEPHIR_INIT_NVAR(&referenceSql);
 				ZEPHIR_CONCAT_SVSVSSVSVS(&referenceSql, "CONSTRAINT `", &_51$$29, "` FOREIGN KEY (", &_52$$29, ")", " REFERENCES `", &_54$$29, "`(", &_55$$29, ")");
@@ -1280,13 +1280,13 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, createTable)
 					zephir_check_call_status();
 					ZEPHIR_CALL_METHOD(&_61$$32, &reference, "getcolumns", NULL, 0);
 					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(&_60$$32, this_ptr, "getcolumnlist", &_35, 50, &_61$$32);
+					ZEPHIR_CALL_METHOD(&_60$$32, this_ptr, "getcolumnlist", &_35, 54, &_61$$32);
 					zephir_check_call_status();
 					ZEPHIR_CALL_METHOD(&_62$$32, &reference, "getreferencedtable", NULL, 0);
 					zephir_check_call_status();
 					ZEPHIR_CALL_METHOD(&_64$$32, &reference, "getreferencedcolumns", NULL, 0);
 					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(&_63$$32, this_ptr, "getcolumnlist", &_35, 50, &_64$$32);
+					ZEPHIR_CALL_METHOD(&_63$$32, this_ptr, "getcolumnlist", &_35, 54, &_64$$32);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&referenceSql);
 					ZEPHIR_CONCAT_SVSVSSVSVS(&referenceSql, "CONSTRAINT `", &_59$$32, "` FOREIGN KEY (", &_60$$32, ")", " REFERENCES `", &_62$$32, "`(", &_63$$32, ")");
@@ -1844,13 +1844,13 @@ PHP_METHOD(Phalcon_Db_Dialect_Sqlite, listIndexesSql)
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "escape", NULL, 49, &table);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "escape", NULL, 53, &table);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_CONCAT_SVS(&_1, "SELECT sql FROM sqlite_master WHERE type = 'index' AND tbl_name = ", &_0, " COLLATE NOCASE");
 	zephir_get_strval(&sql, &_1);
 	if (!(ZEPHIR_IS_EMPTY(&keyName))) {
-		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "escape", NULL, 49, &keyName);
+		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "escape", NULL, 53, &keyName);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_3$$3);
 		ZEPHIR_CONCAT_SVS(&_3$$3, " AND name = ", &_2$$3, " COLLATE NOCASE");

@@ -127,7 +127,7 @@ PHP_METHOD(Phalcon_Annotations_Adapter_Apc, read)
 	ZEPHIR_INIT_VAR(&_2);
 	ZEPHIR_CONCAT_SVV(&_2, "_PHAN", &_1, &key);
 	zephir_fast_strtolower(&_0, &_2);
-	ZEPHIR_RETURN_CALL_FUNCTION("apc_fetch", NULL, 81, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("apc_fetch", NULL, 83, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -177,7 +177,7 @@ PHP_METHOD(Phalcon_Annotations_Adapter_Apc, write)
 	ZEPHIR_CONCAT_SVV(&_2, "_PHAN", &_1, &key);
 	zephir_fast_strtolower(&_0, &_2);
 	zephir_read_property(&_3, this_ptr, ZEND_STRL("_ttl"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("apc_store", NULL, 82, &_0, data, &_3);
+	ZEPHIR_RETURN_CALL_FUNCTION("apc_store", NULL, 84, &_0, data, &_3);
 	zephir_check_call_status();
 	RETURN_MM();
 }

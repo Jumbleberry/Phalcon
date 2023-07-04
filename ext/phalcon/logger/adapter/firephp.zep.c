@@ -132,15 +132,15 @@ PHP_METHOD(Phalcon_Logger_Adapter_Firephp, logInternal)
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "X-Wf-Protocol-1: http://meta.wildfirehq.org/Protocol/JsonStream/0.2");
-		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 230, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 234, &_1$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "X-Wf-1-Plugin-1: http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3");
-		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 230, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 234, &_1$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "X-Wf-Structure-1: http://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1");
-		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 230, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 234, &_1$$3);
 		zephir_check_call_status();
 		if (1) {
 			zephir_update_property_zval(this_ptr, ZEND_STRL("_initialized"), &__$true);
@@ -155,7 +155,7 @@ PHP_METHOD(Phalcon_Logger_Adapter_Firephp, logInternal)
 	ZEPHIR_CALL_METHOD(&format, &_2, "format", NULL, 0, &message, &_3, &_4, &context);
 	zephir_check_call_status();
 	ZVAL_LONG(&_3, 4500);
-	ZEPHIR_CALL_FUNCTION(&chunk, "str_split", NULL, 69, &format, &_3);
+	ZEPHIR_CALL_FUNCTION(&chunk, "str_split", NULL, 71, &format, &_3);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&index);
 	zephir_read_property(&index, this_ptr, ZEND_STRL("_index"), PH_NOISY_CC);
@@ -177,7 +177,7 @@ PHP_METHOD(Phalcon_Logger_Adapter_Firephp, logInternal)
 			if (zephir_array_isset_long(&chunk, (zephir_get_numberval(&key) + 1))) {
 				zephir_concat_self_str(&content, SL("|\\"));
 			}
-			ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 230, &content);
+			ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 234, &content);
 			zephir_check_call_status();
 			ZEPHIR_SEPARATE(&index);
 			zephir_increment(&index);
@@ -201,7 +201,7 @@ PHP_METHOD(Phalcon_Logger_Adapter_Firephp, logInternal)
 				if (zephir_array_isset_long(&chunk, (zephir_get_numberval(&key) + 1))) {
 					zephir_concat_self_str(&content, SL("|\\"));
 				}
-				ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 230, &content);
+				ZEPHIR_CALL_FUNCTION(NULL, "header", NULL, 234, &content);
 				zephir_check_call_status();
 				ZEPHIR_SEPARATE(&index);
 				zephir_increment(&index);

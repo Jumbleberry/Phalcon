@@ -198,7 +198,7 @@ PHP_METHOD(Phalcon_Cache_Frontend_Igbinary, beforeStore)
 	zephir_fetch_params(1, 1, 0, &data);
 
 
-	ZEPHIR_RETURN_CALL_FUNCTION("igbinary_serialize", NULL, 123, data);
+	ZEPHIR_RETURN_CALL_FUNCTION("igbinary_serialize", NULL, 125, data);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -230,7 +230,7 @@ PHP_METHOD(Phalcon_Cache_Frontend_Igbinary, afterRetrieve)
 		RETVAL_ZVAL(data, 1, 0);
 		RETURN_MM();
 	}
-	ZEPHIR_RETURN_CALL_FUNCTION("igbinary_unserialize", NULL, 124, data);
+	ZEPHIR_RETURN_CALL_FUNCTION("igbinary_unserialize", NULL, 126, data);
 	zephir_check_call_status();
 	RETURN_MM();
 }

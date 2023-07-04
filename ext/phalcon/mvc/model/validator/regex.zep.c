@@ -155,7 +155,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Validator_Regex, validate)
 		ZEPHIR_INIT_VAR(&_6$$8);
 		zephir_create_array(&_6$$8, 1, 0);
 		zephir_array_update_string(&_6$$8, SL(":field"), &field, PH_COPY | PH_SEPARATE);
-		ZEPHIR_CALL_FUNCTION(&_7$$8, "strtr", NULL, 22, &message, &_6$$8);
+		ZEPHIR_CALL_FUNCTION(&_7$$8, "strtr", NULL, 26, &message, &_6$$8);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_5$$8);
 		ZVAL_STRING(&_5$$8, "Regex");

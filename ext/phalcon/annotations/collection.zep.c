@@ -107,7 +107,7 @@ PHP_METHOD(Phalcon_Annotations_Collection, __construct)
 				ZVAL_COPY(&annotationData, _1$$4);
 				ZEPHIR_INIT_NVAR(&_3$$5);
 				object_init_ex(&_3$$5, phalcon_annotations_annotation_ce);
-				ZEPHIR_CALL_METHOD(NULL, &_3$$5, "__construct", &_4, 88, &annotationData);
+				ZEPHIR_CALL_METHOD(NULL, &_3$$5, "__construct", &_4, 90, &annotationData);
 				zephir_check_call_status();
 				zephir_array_append(&annotations, &_3$$5, PH_SEPARATE, "phalcon/annotations/collection.zep", 66);
 			} ZEND_HASH_FOREACH_END();
@@ -124,7 +124,7 @@ PHP_METHOD(Phalcon_Annotations_Collection, __construct)
 				zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_5$$6);
 					object_init_ex(&_5$$6, phalcon_annotations_annotation_ce);
-					ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_4, 88, &annotationData);
+					ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_4, 90, &annotationData);
 					zephir_check_call_status();
 					zephir_array_append(&annotations, &_5$$6, PH_SEPARATE, "phalcon/annotations/collection.zep", 66);
 				ZEPHIR_CALL_METHOD(NULL, reflectionData, "next", NULL, 0);

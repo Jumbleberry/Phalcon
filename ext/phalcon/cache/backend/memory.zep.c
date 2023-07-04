@@ -584,7 +584,7 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, __serialize)
 	ZEPHIR_OBS_VAR(&_1);
 	zephir_read_property(&_1, this_ptr, ZEND_STRL("_frontend"), PH_NOISY_CC);
 	zephir_array_update_string(&_0, SL("frontend"), &_1, PH_COPY | PH_SEPARATE);
-	ZEPHIR_RETURN_CALL_FUNCTION("serialize", NULL, 61, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("serialize", NULL, 13, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -614,7 +614,7 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, __unserialize)
 	zephir_fetch_params(1, 1, 0, &data);
 
 
-	ZEPHIR_CALL_FUNCTION(&unserialized, "unserialize", NULL, 62, data);
+	ZEPHIR_CALL_FUNCTION(&unserialized, "unserialize", NULL, 14, data);
 	zephir_check_call_status();
 	if (Z_TYPE_P(&unserialized) != IS_ARRAY) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_ce_exception, "Unserialized data must be an array", "phalcon/cache/backend/memory.zep", 295);

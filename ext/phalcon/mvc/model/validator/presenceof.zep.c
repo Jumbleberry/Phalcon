@@ -124,7 +124,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Validator_PresenceOf, validate)
 		ZEPHIR_INIT_VAR(&_4$$4);
 		zephir_create_array(&_4$$4, 1, 0);
 		zephir_array_update_string(&_4$$4, SL(":field"), &field, PH_COPY | PH_SEPARATE);
-		ZEPHIR_CALL_FUNCTION(&_5$$4, "strtr", NULL, 22, &message, &_4$$4);
+		ZEPHIR_CALL_FUNCTION(&_5$$4, "strtr", NULL, 26, &message, &_4$$4);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_3$$4);
 		ZVAL_STRING(&_3$$4, "PresenceOf");

@@ -124,7 +124,7 @@ PHP_METHOD(Phalcon_Config_Factory, loadClass)
 		ZEPHIR_CPY_WRT(&oldConfig, config);
 		ZEPHIR_INIT_VAR(&_0$$3);
 		ZVAL_STRING(&_0$$3, ".");
-		ZEPHIR_CALL_FUNCTION(&_1$$3, "strrchr", NULL, 137, config, &_0$$3);
+		ZEPHIR_CALL_FUNCTION(&_1$$3, "strrchr", NULL, 142, config, &_0$$3);
 		zephir_check_call_status();
 		ZVAL_LONG(&_2$$3, 1);
 		ZEPHIR_INIT_VAR(&extension);
@@ -168,7 +168,7 @@ PHP_METHOD(Phalcon_Config_Factory, loadClass)
 		ZEPHIR_INIT_VAR(&_8$$8);
 		zephir_fast_strpos(&_8$$8, &filePath, &_7$$8, 0 );
 		if (!(zephir_is_true(&_8$$8))) {
-			ZEPHIR_CALL_FUNCTION(&_9$$9, "lcfirst", NULL, 64, &adapter);
+			ZEPHIR_CALL_FUNCTION(&_9$$9, "lcfirst", NULL, 66, &adapter);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_10$$9);
 			ZEPHIR_CONCAT_VSV(&_10$$9, &filePath, ".", &_9$$9);

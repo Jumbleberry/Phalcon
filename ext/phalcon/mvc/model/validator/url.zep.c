@@ -117,7 +117,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Validator_Url, validate)
 		RETURN_MM_BOOL(1);
 	}
 	ZVAL_LONG(&_3, 273);
-	ZEPHIR_CALL_FUNCTION(&_4, "filter_var", NULL, 194, &value, &_3);
+	ZEPHIR_CALL_FUNCTION(&_4, "filter_var", NULL, 200, &value, &_3);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_4))) {
 		ZEPHIR_INIT_VAR(&_5$$5);
@@ -131,7 +131,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Validator_Url, validate)
 		ZEPHIR_INIT_VAR(&_6$$5);
 		zephir_create_array(&_6$$5, 1, 0);
 		zephir_array_update_string(&_6$$5, SL(":field"), &field, PH_COPY | PH_SEPARATE);
-		ZEPHIR_CALL_FUNCTION(&_7$$5, "strtr", NULL, 22, &message, &_6$$5);
+		ZEPHIR_CALL_FUNCTION(&_7$$5, "strtr", NULL, 26, &message, &_6$$5);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_5$$5);
 		ZVAL_STRING(&_5$$5, "Url");

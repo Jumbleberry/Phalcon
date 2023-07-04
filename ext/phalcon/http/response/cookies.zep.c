@@ -639,7 +639,7 @@ PHP_METHOD(Phalcon_Http_Response_Cookies, send)
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&_0, "headers_sent", NULL, 23);
+	ZEPHIR_CALL_FUNCTION(&_0, "headers_sent", NULL, 27);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		zephir_read_property(&_1$$3, this_ptr, ZEND_STRL("_cookies"), PH_NOISY_CC | PH_READONLY);

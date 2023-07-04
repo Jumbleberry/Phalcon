@@ -147,9 +147,9 @@ PHP_METHOD(Phalcon_Session_Adapter_Memcache, __construct)
 	ZEPHIR_OBS_VAR(&_6);
 	zephir_read_property(&_6, this_ptr, ZEND_STRL("_lifetime"), PH_NOISY_CC);
 	zephir_array_update_string(&_5, SL("lifetime"), &_6, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 319, &_5);
+	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 323, &_5);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 321, &_4, &options);
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 325, &_4, &options);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("_memcache"), &_3);
 	ZEPHIR_INIT_VAR(&_7);
@@ -188,7 +188,7 @@ PHP_METHOD(Phalcon_Session_Adapter_Memcache, __construct)
 	ZEPHIR_INIT_NVAR(&_8);
 	ZVAL_STRING(&_8, "gc");
 	zephir_array_fast_append(&_13, &_8);
-	ZEPHIR_CALL_FUNCTION(NULL, "session_set_save_handler", NULL, 414, &_7, &_9, &_10, &_11, &_12, &_13);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_set_save_handler", NULL, 418, &_7, &_9, &_10, &_11, &_12, &_13);
 	zephir_check_call_status();
 	ZEPHIR_CALL_PARENT(NULL, phalcon_session_adapter_memcache_ce, getThis(), "__construct", &_14, 0, &options);
 	zephir_check_call_status();

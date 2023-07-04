@@ -1,338 +1,261 @@
 
-/*
- +------------------------------------------------------------------------+
- | Phalcon Framework                                                      |
- +------------------------------------------------------------------------+
- | Copyright (c) 2011-2017 Phalcon Team (https://phalconphp.com)          |
- +------------------------------------------------------------------------+
- | This source file is subject to the New BSD License that is bundled     |
- | with this package in the file LICENSE.txt.                             |
- |                                                                        |
- | If you did not receive a copy of the license and are unable to         |
- | obtain it through the world-wide-web, please send an email             |
- | to license@phalconphp.com so we can send you a copy immediately.       |
- +------------------------------------------------------------------------+
- | Authors: Andres Gutierrez <andres@phalconphp.com>                      |
- |          Eduar Carvajal <eduar@phalconphp.com>                         |
- +------------------------------------------------------------------------+
-*/
-
-namespace Phalcon;
-
-use Phalcon\Config\Exception;
-
 /**
- * Phalcon\Config
+ * This file is part of the Phalcon Framework.
  *
- * Phalcon\Config is designed to simplify the access to, and the use of, configuration data within applications.
- * It provides a nested object property based user interface for accessing this configuration data within
- * application code.
+ * (c) Phalcon Team <team@phalcon.io>
  *
- *<code>
- * $config = new \Phalcon\Config(
- *     [
- *         "database" => [
- *             "adapter"  => "Mysql",
- *             "host"     => "localhost",
- *             "username" => "scott",
- *             "password" => "cheetah",
- *             "dbname"   => "test_db",
- *         ],
- *         "phalcon" => [
- *             "controllersDir" => "../app/controllers/",
- *             "modelsDir"      => "../app/models/",
- *             "viewsDir"       => "../app/views/",
- *         ],
- *     ]
- * );
- *</code>
+ * For the full copyright and license information, please view the LICENSE.txt
+ * file that was distributed with this source code.
  */
-class Config implements \ArrayAccess, \Countable
-{
 
-	protected static _pathDelimiter;
+ namespace Phalcon;
 
-	const DEFAULT_PATH_DELIMITER = ".";
-
-	/**
-	 * Phalcon\Config constructor
-	 */
-	public function __construct(array! arrayConfig = null)
-	{
-		var key, value;
-
-		for key, value in arrayConfig {
-			this->offsetSet(key, value);
-		}
-	}
-
-	/**
-	 * Allows to check whether an attribute is defined using the array-syntax
-	 *
-	 *<code>
-	 * var_dump(
-	 *     isset($config["database"])
-	 * );
-	 *</code>
-	 */
-	public function offsetExists(var index) -> boolean
-	{
-		let index = strval(index);
-
-		return isset this->{index};
-	}
-
-	/**
-	 * Returns a value from current config using a dot separated path.
-	 *
-	 *<code>
-	 * echo $config->path("unknown.path", "default", ".");
-	 *</code>
-	 */
-	public function path(string! path, var defaultValue = null, var delimiter = null) -> var
-	{
-		var key, keys, config;
-
-		if isset this->{path} {
-			return this->{path};
-		}
-
-		if empty delimiter {
-			let delimiter = self::getPathDelimiter();
-		}
-
-		let config = this,
-			keys = explode(delimiter, path);
-
-		while !empty keys {
-			let key = array_shift(keys);
-
-			if !isset config->{key} {
-				break;
-			}
-
-			if empty keys {
-				return config->{key};
-			}
-
-			let config = config->{key};
-
-			if empty config {
-				break;
-			}
-		}
-
-		return defaultValue;
-	}
-
-	/**
-	 * Gets an attribute from the configuration, if the attribute isn't defined returns null
-	 * If the value is exactly null or is not defined the default value will be used instead
-	 *
-	 *<code>
-	 * echo $config->get("controllersDir", "../app/controllers/");
-	 *</code>
-	 */
-	public function get(var index, var defaultValue = null) -> var
-	{
-		let index = strval(index);
-
-		if isset this->{index} {
-			return this->{index};
-		}
-
-		return defaultValue;
-	}
-
-	/**
-	 * Gets an attribute using the array-syntax
-	 *
-	 *<code>
-	 * print_r(
-	 *     $config["database"]
-	 * );
-	 *</code>
-	 */
-	public function offsetGet(var index) -> string
-	{
-		let index = strval(index);
-
-		return this->{index};
-	}
-
-	/**
-	 * Sets an attribute using the array-syntax
-	 *
-	 *<code>
-	 * $config["database"] = [
-	 *     "type" => "Sqlite",
-	 * ];
-	 *</code>
-	 */
-	public function offsetSet(var index, var value)
-	{
-		let index = strval(index);
-
-		if typeof value === "array" {
-			let this->{index} = new self(value);
-		} else {
-			let this->{index} = value;
-		}
-	}
-
-	/**
-	 * Unsets an attribute using the array-syntax
-	 *
-	 *<code>
-	 * unset($config["database"]);
-	 *</code>
-	 */
-	public function offsetUnset(var index)
-	{
-		let index = strval(index);
-
-		//unset(this->{index});
-		let this->{index} = null;
-	}
-
-	/**
-	 * Merges a configuration into the current one
-	 *
-	 *<code>
-	 * $appConfig = new \Phalcon\Config(
-	 *     [
-	 *         "database" => [
-	 *             "host" => "localhost",
-	 *         ],
-	 *     ]
-	 * );
-	 *
-	 * $globalConfig->merge($appConfig);
-	 *</code>
-	 */
-	public function merge(<Config> config) -> <Config>
-	{
-		return this->_merge(config);
-	}
-
-	/**
-	 * Converts recursively the object to an array
-	 *
-	 *<code>
-	 * print_r(
-	 *     $config->toArray()
-	 * );
-	 *</code>
-	 */
-	public function toArray() -> array
-	{
-		var key, value, arrayConfig;
-
-		let arrayConfig = [];
-		for key, value in get_object_vars(this) {
-			if typeof value === "object" {
-				if method_exists(value, "toArray") {
-					let arrayConfig[key] = value->toArray();
-				} else {
-					let arrayConfig[key] = value;
-				}
-			} else {
-				let arrayConfig[key] = value;
-			}
-		}
-		return arrayConfig;
-	}
-
-	/**
-	 * Returns the count of properties set in the config
-	 *
-	 *<code>
-	 * print count($config);
-	 *</code>
-	 *
-	 * or
-	 *
-	 *<code>
-	 * print $config->count();
-	 *</code>
-	 */
-	public function count() -> int
-	{
-		return count(get_object_vars(this));
-	}
-
-	/**
-	 * Restores the state of a Phalcon\Config object
-	 */
-	public static function __set_state(array! data) -> <Config>
-	{
-		return new self(data);
-	}
-
-	/**
-	 * Sets the default path delimiter
-	 */
-	public static function setPathDelimiter(string! delimiter = null) -> void
-	{
-		let self::_pathDelimiter = delimiter;
-	}
-
-	/**
-	 * Gets the default path delimiter
-	 */
-	public static function getPathDelimiter() -> string
-	{
-		var delimiter;
-
-		let delimiter = self::_pathDelimiter;
-		if !delimiter {
-			let delimiter = self::DEFAULT_PATH_DELIMITER;
-		}
-
-		return delimiter;
-	}
-
-	/**
-	 * Helper method for merge configs (forwarding nested config instance)
-	 *
-	 * @param Config config
-	 * @param Config instance = null
-	 *
-	 * @return Config merged config
-	 */
-	protected final function _merge(<Config> config, var instance = null) -> <Config>
-	{
-		var key, value, number, localObject, property;
-
-		if typeof instance !== "object" {
-			let instance = this;
-		}
-
-		let number = instance->count();
-
-		for key, value in get_object_vars(config) {
-
-			let property = strval(key);
-			if fetch localObject, instance->{property} {
-				if typeof localObject === "object" && typeof value === "object" {
-					if localObject instanceof Config && value instanceof Config {
-						this->_merge(value, localObject);
-						continue;
-					}
-				}
-			}
-
-			if is_numeric(key) {
-				let key = strval(key);
-				while instance->offsetExists(key) {
-					// increment the number afterwards, because "number" starts at one not zero.
-					let key = strval(number);
-					let number++;
-				}
- 			}
-			let instance->{key} = value;
-		}
-
-		return instance;
-	}
-}
+ use Phalcon\Support\Collection;
+ use Phalcon\Config\ConfigInterface;
+ use Phalcon\Config\Exception;
+ 
+ /**
+  * `Phalcon\Config` is designed to simplify the access to, and the use of,
+  * configuration data within applications. It provides a nested object property
+  * based user interface for accessing this configuration data within application
+  * code.
+  *
+  *```php
+  * $config = new \Phalcon\Config(
+  *     [
+  *         "database" => [
+  *             "adapter"  => "Mysql",
+  *             "host"     => "localhost",
+  *             "username" => "scott",
+  *             "password" => "cheetah",
+  *             "dbname"   => "test_db",
+  *         ],
+  *         "phalcon" => [
+  *             "controllersDir" => "../app/controllers/",
+  *             "modelsDir"      => "../app/models/",
+  *             "viewsDir"       => "../app/views/",
+  *         ],
+  *     ]
+  * );
+  *```
+  */
+ class Config extends Collection implements ConfigInterface
+ {
+	 const DEFAULT_PATH_DELIMITER = ".";
+ 
+	 /**
+	  * @var string
+	  */
+	 protected pathDelimiter = self::DEFAULT_PATH_DELIMITER;
+ 
+	 /**
+	  * Gets the default path delimiter
+	  *
+	  * @return string
+	  */
+	 public function getPathDelimiter() -> string
+	 {
+		 return this->pathDelimiter;
+	 }
+ 
+	 /**
+	  * Merges a configuration into the current one
+	  *
+	  *```php
+	  * $appConfig = new \Phalcon\Config(
+	  *     [
+	  *         "database" => [
+	  *             "host" => "localhost",
+	  *         ],
+	  *     ]
+	  * );
+	  *
+	  * $globalConfig->merge($appConfig);
+	  *```
+	  *
+	  * @param array|ConfigInterface $toMerge
+	  *
+	  * @return ConfigInterface
+	  * @throws Exception
+	  */
+	 public function merge(var toMerge) -> <ConfigInterface>
+	 {
+		 var result, source;
+ 
+		 let source = this->toArray();
+ 
+		 this->clear();
+ 
+		 if typeof toMerge === "array" {
+			 let result = this->internalMerge(source, toMerge);
+ 
+			 this->init(result);
+ 
+			 return this;
+		 }
+ 
+		 if typeof toMerge === "object" && toMerge instanceof ConfigInterface {
+			 let result = this->internalMerge(source, toMerge->toArray());
+ 
+			 this->init(result);
+ 
+			 return this;
+		 }
+ 
+		 throw new Exception("Invalid data type for merge.");
+	 }
+ 
+	 /**
+	  * Returns a value from current config using a dot separated path.
+	  *
+	  *```php
+	  * echo $config->path("unknown.path", "default", ".");
+	  *```
+	  *
+	  * @param string      $path
+	  * @param mixed|null  $defaultValue
+	  * @param string|null $delimiter
+	  *
+	  * @return mixed
+	  */
+	 public function path(
+		 string path,
+		 var defaultValue = null,
+		 string delimiter = null
+	 ) -> var {
+		 var config, key, keys, pathDelimiter;
+ 
+		 if (true === this->has(path)) {
+			 return this->get(path);
+		 }
+ 
+		 let pathDelimiter = delimiter;
+		 if (true === empty(pathDelimiter)) {
+			 let pathDelimiter = this->pathDelimiter;
+		 }
+ 
+		 let config = clone this,
+			 keys   = explode(pathDelimiter, path);
+ 
+		 while (true !== empty(keys)) {
+			 let key = array_shift(keys);
+ 
+			 if (true !== config->has(key)) {
+				 break;
+			 }
+ 
+			 if (true === empty(keys)) {
+				 return config->get(key);
+			 }
+ 
+			 let config = config->get(key);
+ 
+			 if (true === empty(config) || typeof config !== "object" || !(config instanceof ConfigInterface)) {
+				 break;
+			 }
+		 }
+ 
+		 return defaultValue;
+	 }
+ 
+	 /**
+	  * Sets the default path delimiter
+	  *
+	  * @param string|null $delimiter
+	  *
+	  * @return ConfigInterface
+	  */
+	 public function setPathDelimiter(string delimiter = null) -> <ConfigInterface>
+	 {
+		 let this->pathDelimiter = delimiter;
+ 
+		 return this;
+	 }
+ 
+	 /**
+	  * Converts recursively the object to an array
+	  *
+	  *```php
+	  * print_r(
+	  *     $config->toArray()
+	  * );
+	  *```
+	  *
+	  * @return array
+	  */
+	 public function toArray() -> array
+	 {
+		 var data, key, value;
+		 array results;
+ 
+		 let results = [],
+			 data    = parent::toArray();
+ 
+		 for key, value in data {
+			 if (
+				 typeof value === "object" &&
+				 true === method_exists(value, "toArray")
+			 ) {
+				 let value = value->toArray();
+			 }
+ 
+			 let results[key] = value;
+		 }
+ 
+		 return results;
+	 }
+ 
+	 /**
+	  * Performs a merge recursively
+	  *
+	  * @param array $source
+	  * @param array $target
+	  *
+	  * @return array
+	  */
+	 final protected function internalMerge(array source, array target) -> array
+	 {
+		 var key, value;
+ 
+		 for key, value in target {
+			 if (
+				 typeof value === "array" &&
+				 true === isset(source[key]) &&
+				 typeof source[key] === "array"
+			 ) {
+				 let source[key] = this->internalMerge(source[key], value);
+ 
+				 continue;
+			 }
+ 
+			 let source[key] = value;
+		 }
+ 
+		 return source;
+	 }
+ 
+	 /**
+	  * Sets the collection data
+	  *
+	  * @param mixed $element
+	  * @param mixed $value
+	  */
+	 protected function setData(var element, var value) -> void
+	 {
+		 var data, key;
+		 let data    = this->data,
+			 element = (string) element,
+			 key     = (this->insensitive) ? mb_strtolower(element) : element;
+ 
+		 let this->lowerKeys[key] = element;
+ 
+		 if typeof value === "array" {
+			 let data[element] = new Config(value, this->insensitive);
+		 } else {
+			 let data[element] = value;
+		 }
+ 
+		 let this->data = data;
+	 }
+ }
+ 

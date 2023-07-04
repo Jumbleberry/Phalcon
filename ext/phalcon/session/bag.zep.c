@@ -670,7 +670,7 @@ PHP_METHOD(Phalcon_Session_Bag, getIterator)
 	}
 	object_init_ex(return_value, spl_ce_ArrayIterator);
 	zephir_read_property(&_1, this_ptr, ZEND_STRL("_data"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 415, &_1);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 11, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 }

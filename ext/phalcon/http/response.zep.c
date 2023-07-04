@@ -248,7 +248,7 @@ PHP_METHOD(Phalcon_Http_Response, setStatusCode)
 				if (_5$$4) {
 					ZEPHIR_INIT_NVAR(&_6$$4);
 					ZVAL_STRING(&_6$$4, "HTTP/");
-					ZEPHIR_CALL_FUNCTION(&_7$$4, "strstr", &_8, 228, &key, &_6$$4);
+					ZEPHIR_CALL_FUNCTION(&_7$$4, "strstr", &_8, 232, &key, &_6$$4);
 					zephir_check_call_status();
 					_5$$4 = zephir_is_true(&_7$$4);
 				}
@@ -274,7 +274,7 @@ PHP_METHOD(Phalcon_Http_Response, setStatusCode)
 					if (_10$$6) {
 						ZEPHIR_INIT_NVAR(&_11$$6);
 						ZVAL_STRING(&_11$$6, "HTTP/");
-						ZEPHIR_CALL_FUNCTION(&_12$$6, "strstr", &_8, 228, &key, &_11$$6);
+						ZEPHIR_CALL_FUNCTION(&_12$$6, "strstr", &_8, 232, &key, &_11$$6);
 						zephir_check_call_status();
 						_10$$6 = zephir_is_true(&_12$$6);
 					}
@@ -1058,7 +1058,7 @@ PHP_METHOD(Phalcon_Http_Response, redirect)
 		if (_0$$5) {
 			ZEPHIR_INIT_VAR(&_1$$5);
 			ZVAL_STRING(&_1$$5, "://");
-			ZEPHIR_CALL_FUNCTION(&_2$$5, "strstr", NULL, 228, location, &_1$$5);
+			ZEPHIR_CALL_FUNCTION(&_2$$5, "strstr", NULL, 232, location, &_1$$5);
 			zephir_check_call_status();
 			_0$$5 = zephir_is_true(&_2$$5);
 		}
@@ -1362,7 +1362,7 @@ PHP_METHOD(Phalcon_Http_Response, send)
 			_1$$5 = ((zephir_fast_strlen_ev(&file)) ? 1 : 0);
 		}
 		if (_1$$5) {
-			ZEPHIR_CALL_FUNCTION(NULL, "readfile", NULL, 229, &file);
+			ZEPHIR_CALL_FUNCTION(NULL, "readfile", NULL, 233, &file);
 			zephir_check_call_status();
 		}
 	}

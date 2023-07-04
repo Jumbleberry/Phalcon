@@ -134,7 +134,7 @@ PHP_METHOD(Phalcon_Mvc_Model_MetaData_Xcache, read)
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("_prefix"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_CONCAT_SVV(&_1, "$PMM$", &_0, &key);
-	ZEPHIR_CALL_FUNCTION(&data, "xcache_get", NULL, 85, &_1);
+	ZEPHIR_CALL_FUNCTION(&data, "xcache_get", NULL, 87, &_1);
 	zephir_check_call_status();
 	if (Z_TYPE_P(&data) == IS_ARRAY) {
 		RETURN_CCTOR(&data);
@@ -187,7 +187,7 @@ PHP_METHOD(Phalcon_Mvc_Model_MetaData_Xcache, write)
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_CONCAT_SVV(&_1, "$PMM$", &_0, &key);
 	zephir_read_property(&_2, this_ptr, ZEND_STRL("_ttl"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(NULL, "xcache_set", NULL, 86, &_1, data, &_2);
+	ZEPHIR_CALL_FUNCTION(NULL, "xcache_set", NULL, 88, &_1, data, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 }
