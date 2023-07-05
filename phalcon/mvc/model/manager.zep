@@ -275,7 +275,7 @@ class Manager implements ManagerInterface, InjectionAwareInterface, EventsAwareI
 	/**
 	 * Loads a model throwing an exception if it doesn't exist
 	 */
-	public function load(string! modelName, boolean newInstance = false) -> <ModelInterface>
+	public function load(string! modelName, boolean newInstance = true) -> <ModelInterface>
 	{
 		var model, colonPos, namespaceName, namespaceAlias, className;
 

@@ -419,7 +419,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Manager, load)
 		ZEPHIR_INIT_VAR(&modelName);
 	}
 	if (!newInstance_param) {
-		newInstance = 0;
+		newInstance = 1;
 	} else {
 		newInstance = zephir_get_boolval(newInstance_param);
 	}
