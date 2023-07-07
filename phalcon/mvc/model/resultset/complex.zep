@@ -283,12 +283,12 @@ class Complex extends Resultset implements ResultsetInterface
 			columnTypes = this->_columnTypes,
 			hydrateMode = this->_hydrateMode;
 
-		let serialized = serialize([
+		let serialized = [
 			"cache"	      : cache,
 			"rows"		  : records,
 			"columnTypes" : columnTypes,
 			"hydrateMode" : hydrateMode
-		]);
+		];
 
 		return serialized;
 	}
@@ -298,22 +298,19 @@ class Complex extends Resultset implements ResultsetInterface
 	 */
 	public function __unserialize(var data) -> void
 	{
-		var resultset;
-
 		/**
 		* Rows are already hydrated
 		*/
 		let this->_disableHydration = true;
 
-		let resultset = unserialize(data);
-		if typeof resultset != "array" {
+		if typeof data != "array" {
 			throw new Exception("Invalid serialization data");
 		}
 
-		let this->_rows = resultset["rows"],
-			this->_count = count(resultset["rows"]),
-			this->_cache = resultset["cache"],
-			this->_columnTypes = resultset["columnTypes"],
-			this->_hydrateMode = resultset["hydrateMode"];
+		let this->_rows = data["rows"],
+			this->_count = count(data["rows"]),
+			this->_cache = data["cache"],
+			this->_columnTypes = data["columnTypes"],
+			this->_hydrateMode = data["hydrateMode"];
 	}
 }

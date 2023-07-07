@@ -4646,22 +4646,21 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			 * If attributes is not the same as snapshot then save snapshot too
 			 */
 			if snapshot != null && attributes != snapshot {
-				return serialize(["_attributes": attributes, "_snapshot": snapshot]);
+				return ["_attributes": attributes, "_snapshot": snapshot];
 			}
 		}
 
-		return serialize(attributes);
+		return attributes;
 	}
 
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function __unserialize(var data)
+	public function __unserialize(var data) -> void
 	{
-		var attributes, dependencyInjector, manager, key, value, snapshot;
+		var dependencyInjector, manager, key, value, snapshot;
 
-		let attributes = unserialize(data);
-		if typeof attributes == "array" {
+		if typeof data == "array" {
 
 			/**
 			 * Obtain the default DI
@@ -4694,19 +4693,19 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			 */
 			manager->initialize(this);
 			if manager->isKeepingSnapshots(this) {
-				if fetch snapshot, attributes["_snapshot"] {
+				if fetch snapshot, data["_snapshot"] {
 					let this->_snapshot = snapshot;
-					let attributes = attributes["_attributes"];
+					let data = data["_attributes"];
 				}
 				else {
-					let this->_snapshot = attributes;
+					let this->_snapshot = data;
 				}
 			}
 
 			/**
 			 * Update the objects attributes
 			 */
-			for key, value in attributes {
+			for key, value in data {
 				let this->{key} = value;
 			}
 		}

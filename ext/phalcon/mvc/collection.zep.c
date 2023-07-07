@@ -2976,19 +2976,15 @@ PHP_METHOD(Phalcon_Mvc_Collection, toArray)
  */
 PHP_METHOD(Phalcon_Mvc_Collection, __serialize)
 {
-	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&_0);
 
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "toarray", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("serialize", NULL, 13, &_0);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "toarray", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -3001,13 +2997,12 @@ PHP_METHOD(Phalcon_Mvc_Collection, __unserialize)
 	zend_string *_5$$3;
 	zend_ulong _4$$3;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *data, data_sub, attributes, dependencyInjector, manager, key, value, _1$$3, *_2$$3, _3$$3;
+	zephir_fcall_cache_entry *_0 = NULL;
+	zval *data, data_sub, dependencyInjector, manager, key, value, _1$$3, *_2$$3, _3$$3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
-	ZVAL_UNDEF(&attributes);
 	ZVAL_UNDEF(&dependencyInjector);
 	ZVAL_UNDEF(&manager);
 	ZVAL_UNDEF(&key);
@@ -3026,13 +3021,11 @@ PHP_METHOD(Phalcon_Mvc_Collection, __unserialize)
 	zephir_fetch_params(1, 1, 0, &data);
 
 
-	ZEPHIR_CALL_FUNCTION(&attributes, "unserialize", NULL, 14, data);
-	zephir_check_call_status();
-	if (Z_TYPE_P(&attributes) == IS_ARRAY) {
+	if (Z_TYPE_P(data) == IS_ARRAY) {
 		ZEPHIR_CALL_CE_STATIC(&dependencyInjector, phalcon_di_ce, "getdefault", &_0, 0);
 		zephir_check_call_status();
 		if (Z_TYPE_P(&dependencyInjector) != IS_OBJECT) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_collection_exception_ce, "A dependency injector container is required to obtain the services related to the ODM", "phalcon/mvc/collection.zep", 1664);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_collection_exception_ce, "A dependency injector container is required to obtain the services related to the ODM", "phalcon/mvc/collection.zep", 1663);
 			return;
 		}
 		zephir_update_property_zval(this_ptr, ZEND_STRL("_dependencyInjector"), &dependencyInjector);
@@ -3041,13 +3034,13 @@ PHP_METHOD(Phalcon_Mvc_Collection, __unserialize)
 		ZEPHIR_CALL_METHOD(&manager, &dependencyInjector, "getshared", NULL, 0, &_1$$3);
 		zephir_check_call_status();
 		if (Z_TYPE_P(&manager) != IS_OBJECT) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_collection_exception_ce, "The injected service 'collectionManager' is not valid", "phalcon/mvc/collection.zep", 1677);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_collection_exception_ce, "The injected service 'collectionManager' is not valid", "phalcon/mvc/collection.zep", 1676);
 			return;
 		}
 		zephir_update_property_zval(this_ptr, ZEND_STRL("_modelsManager"), &manager);
-		zephir_is_iterable(&attributes, 0, "phalcon/mvc/collection.zep", 1691);
-		if (Z_TYPE_P(&attributes) == IS_ARRAY) {
-			ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&attributes), _4$$3, _5$$3, _2$$3)
+		zephir_is_iterable(data, 0, "phalcon/mvc/collection.zep", 1690);
+		if (Z_TYPE_P(data) == IS_ARRAY) {
+			ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(data), _4$$3, _5$$3, _2$$3)
 			{
 				ZEPHIR_INIT_NVAR(&key);
 				if (_5$$3 != NULL) { 
@@ -3060,20 +3053,20 @@ PHP_METHOD(Phalcon_Mvc_Collection, __unserialize)
 				zephir_update_property_zval_zval(this_ptr, &key, &value);
 			} ZEND_HASH_FOREACH_END();
 		} else {
-			ZEPHIR_CALL_METHOD(NULL, &attributes, "rewind", NULL, 0);
+			ZEPHIR_CALL_METHOD(NULL, data, "rewind", NULL, 0);
 			zephir_check_call_status();
 			while (1) {
-				ZEPHIR_CALL_METHOD(&_3$$3, &attributes, "valid", NULL, 0);
+				ZEPHIR_CALL_METHOD(&_3$$3, data, "valid", NULL, 0);
 				zephir_check_call_status();
 				if (!zend_is_true(&_3$$3)) {
 					break;
 				}
-				ZEPHIR_CALL_METHOD(&key, &attributes, "key", NULL, 0);
+				ZEPHIR_CALL_METHOD(&key, data, "key", NULL, 0);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(&value, &attributes, "current", NULL, 0);
+				ZEPHIR_CALL_METHOD(&value, data, "current", NULL, 0);
 				zephir_check_call_status();
 					zephir_update_property_zval_zval(this_ptr, &key, &value);
-				ZEPHIR_CALL_METHOD(NULL, &attributes, "next", NULL, 0);
+				ZEPHIR_CALL_METHOD(NULL, data, "next", NULL, 0);
 				zephir_check_call_status();
 			}
 		}

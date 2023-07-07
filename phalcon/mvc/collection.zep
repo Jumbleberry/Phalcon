@@ -1643,18 +1643,17 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 		/**
 		 * Use the standard serialize function to serialize the array data
 		 */
-		return serialize(this->toArray());
+		return this->toArray();
 	}
 
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function __unserialize(data)
+	public function __unserialize(data) -> void
 	{
-		var attributes, dependencyInjector, manager, key, value;
+		var dependencyInjector, manager, key, value;
 
-		let attributes = unserialize(data);
-		if typeof attributes == "array" {
+		if typeof data == "array" {
 
 			/**
 			 * Obtain the default DI
@@ -1685,7 +1684,7 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 			/**
 			 * Update the objects attributes
 			 */
-			for key, value in attributes {
+			for key, value in data {
 				let this->{key} = value;
 			}
 		}

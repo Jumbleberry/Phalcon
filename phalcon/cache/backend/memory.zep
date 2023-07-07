@@ -278,23 +278,20 @@ class Memory extends Backend
 	 */
 	public function __serialize() -> array
 	{
-		return serialize([
+		return [
 			"frontend": this->_frontend
-		]);
+		];
 	}
 
 	/**
 	 * Required for interface \Serializable
 	 */
-	public function __unserialize(var data)
+	public function __unserialize(var data) -> void
 	{
-		var unserialized;
-
-		let unserialized = unserialize(data);
-		if typeof unserialized != "array" {
+		if typeof data != "array" {
 			throw new \Exception("Unserialized data must be an array");
 		}
 
-		let this->_frontend = unserialized["frontend"];
+		let this->_frontend = data["frontend"];
 	}
 }

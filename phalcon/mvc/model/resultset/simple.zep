@@ -230,14 +230,14 @@ class Simple extends Resultset
 		/**
 		 * Serialize the cache using the serialize function
 		 */
-		return serialize([
+		return [
 			"model"         : this->_model,
 			"cache"         : this->_cache,
 			"rows"          : this->toArray(false),
 			"columnMap"     : this->_columnMap,
 			"hydrateMode"   : this->_hydrateMode,
 			"keepSnapshots" : this->_keepSnapshots
-		]);
+		];
 	}
 
 	/**
@@ -245,21 +245,20 @@ class Simple extends Resultset
 	 */
 	public function __unserialize(var data) -> void
 	{
-		var resultset, keepSnapshots;
+		var keepSnapshots;
 
-		let resultset = unserialize(data);
-		if typeof resultset != "array" {
+		if typeof data != "array" {
 			throw new Exception("Invalid serialization data");
 		}
 
-		let this->_model = resultset["model"],
-			this->_rows = resultset["rows"],
-			this->_count = count(resultset["rows"]),
-			this->_cache = resultset["cache"],
-			this->_columnMap = resultset["columnMap"],
-			this->_hydrateMode = resultset["hydrateMode"];
+		let this->_model = data["model"],
+			this->_rows = data["rows"],
+			this->_count = count(data["rows"]),
+			this->_cache = data["cache"],
+			this->_columnMap = data["columnMap"],
+			this->_hydrateMode = data["hydrateMode"];
 
-		if fetch keepSnapshots, resultset["keepSnapshots"] {
+		if fetch keepSnapshots, data["keepSnapshots"] {
 		    let this->_keepSnapshots = keepSnapshots;
 		}
 	}
