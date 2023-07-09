@@ -169,21 +169,20 @@ PHP_METHOD(Phalcon_Db_Result_Pdo, fetch)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *fetchStyle = NULL, fetchStyle_sub, *cursorOrientation = NULL, cursorOrientation_sub, *cursorOffset = NULL, cursorOffset_sub, __$null, _0;
+	zval *fetchStyle = NULL, fetchStyle_sub, *cursorOrientation = NULL, cursorOrientation_sub, *cursorOffset = NULL, cursorOffset_sub, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&fetchStyle_sub);
 	ZVAL_UNDEF(&cursorOrientation_sub);
 	ZVAL_UNDEF(&cursorOffset_sub);
-	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 3)
 		Z_PARAM_OPTIONAL
-		Z_PARAM_ZVAL_OR_NULL(fetchStyle)
-		Z_PARAM_ZVAL_OR_NULL(cursorOrientation)
-		Z_PARAM_ZVAL_OR_NULL(cursorOffset)
+		Z_PARAM_ZVAL(fetchStyle)
+		Z_PARAM_ZVAL(cursorOrientation)
+		Z_PARAM_ZVAL(cursorOffset)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -192,15 +191,18 @@ PHP_METHOD(Phalcon_Db_Result_Pdo, fetch)
 	zephir_fetch_params(1, 0, 3, &fetchStyle, &cursorOrientation, &cursorOffset);
 	if (!fetchStyle) {
 		fetchStyle = &fetchStyle_sub;
-		fetchStyle = &__$null;
+		ZEPHIR_INIT_VAR(fetchStyle);
+		ZVAL_LONG(fetchStyle, 0);
 	}
 	if (!cursorOrientation) {
 		cursorOrientation = &cursorOrientation_sub;
-		cursorOrientation = &__$null;
+		ZEPHIR_INIT_VAR(cursorOrientation);
+		ZVAL_LONG(cursorOrientation, 0);
 	}
 	if (!cursorOffset) {
 		cursorOffset = &cursorOffset_sub;
-		cursorOffset = &__$null;
+		ZEPHIR_INIT_VAR(cursorOffset);
+		ZVAL_LONG(cursorOffset, 0);
 	}
 
 
