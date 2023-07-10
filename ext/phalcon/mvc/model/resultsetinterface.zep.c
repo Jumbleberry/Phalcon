@@ -22,6 +22,7 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_ResultsetInterface)
 {
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Mvc\\Model, ResultsetInterface, phalcon, mvc_model_resultsetinterface, phalcon_mvc_model_resultsetinterface_method_entry);
 
+	zend_class_implements(phalcon_mvc_model_resultsetinterface_ce, 1, zend_ce_countable);
 	return SUCCESS;
 }
 
@@ -60,3 +61,7 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ResultsetInterface, getCache);
  * it could consume more memory than currently it does.
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ResultsetInterface, toArray);
+/**
+ * Counts how many rows are in the resultset
+ */
+ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ResultsetInterface, count);

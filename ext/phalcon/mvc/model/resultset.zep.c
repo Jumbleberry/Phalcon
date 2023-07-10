@@ -94,7 +94,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_Resultset)
 	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, phalcon_mvc_model_resultsetinterface_ce);
 	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, zend_ce_iterator);
 	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, spl_ce_SeekableIterator);
-	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, zend_ce_countable);
 	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, zend_ce_arrayaccess);
 	zend_class_implements(phalcon_mvc_model_resultset_ce, 1, php_json_serializable_ce);
 	return SUCCESS;
