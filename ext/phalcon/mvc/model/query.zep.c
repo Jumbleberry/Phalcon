@@ -6566,8 +6566,11 @@ PHP_METHOD(Phalcon_Mvc_Model_Query, _executeSelect)
 		if (isSimpleStd == 1) {
 			ZEPHIR_INIT_VAR(&resultObject);
 			object_init_ex(&resultObject, phalcon_mvc_model_row_ce);
-			ZEPHIR_CALL_METHOD(NULL, &resultObject, "__construct", NULL, 15);
-			zephir_check_call_status();
+			if (zephir_has_constructor(&resultObject)) {
+				ZEPHIR_CALL_METHOD(NULL, &resultObject, "__construct", NULL, 0);
+				zephir_check_call_status();
+			}
+
 			isKeepingSnapshots = 0;
 		} else {
 			if (Z_TYPE_P(&instance) == IS_OBJECT) {

@@ -19,11 +19,13 @@
 
 namespace Phalcon\Mvc\Model;
 
+use stdClass;
+use JsonSerializable;
+use ArrayAccess;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Mvc\EntityInterface;
 use Phalcon\Mvc\Model\Exception;
 use Phalcon\Mvc\Model\ResultInterface;
-use Phalcon\Support\Collection;
 
 /**
  * Phalcon\Mvc\Model\Row
@@ -31,19 +33,41 @@ use Phalcon\Support\Collection;
  * This component allows Phalcon\Mvc\Model to return rows without an associated entity.
  * This objects implements the ArrayAccess interface to allow access the object as object->x or array[x].
  */
-class Row extends Collection implements EntityInterface, ResultInterface
+class Row extends stdClass implements ArrayAccess, EntityInterface, ResultInterface, JsonSerializable
 {
-    /**
-     * @var bool
-     */
-	protected insensitive = false;
-
 	/**
 	 * Set the current object's state
 	 */
 	public function setDirtyState(int dirtyState) -> boolean
 	{
 		return false;
+	}
+
+	/**
+	 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
+	 * Checks whether offset exists in the row
+	 *
+	 * @param string|int $index
+	 * @return boolean
+	 */
+	public function offsetExists(var index) -> boolean
+	{
+		return isset this->{index};
+	}
+
+	/**
+	 * Gets a record in a specific position of the row
+	 *
+	 * @param string|int index
+	 * @return string|Phalcon\Mvc\ModelInterface
+	 */
+	public function offsetGet(var index)
+	{
+		if !this->offsetExists(index) {
+            throw new Exception("The index does not exist in the row");
+        }
+
+        return this->{index};
 	}
 
 	/**
@@ -79,7 +103,11 @@ class Row extends Collection implements EntityInterface, ResultInterface
 	 */
 	public function readAttribute(attribute)
 	{
-		return this->get(attribute);
+		var value;
+		if fetch value, this->{attribute} {
+			return value;
+		}
+		return null;
 	}
 
 	/**
@@ -94,6 +122,26 @@ class Row extends Collection implements EntityInterface, ResultInterface
 	 */
 	public function writeAttribute(string! attribute, value) -> void
 	{
-		this->set(attribute, value);
+		let this->{attribute} = value;
+	}
+
+	/**
+	 * Returns the instance as an array representation
+	 *
+	 * @return array
+	 */
+	public function toArray() -> array
+	{
+		return get_object_vars(this);
+	}
+
+	/**
+	 * Serializes the object for json_encode
+	 *
+	 * @return array
+	 */
+	public function jsonSerialize() -> array
+	{
+		return this->toArray();
 	}
 }
