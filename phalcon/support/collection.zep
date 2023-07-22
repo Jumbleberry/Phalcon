@@ -307,7 +307,7 @@
       */
      public function serialize() -> string
      {
-         return serialize(this->toArray());
+         return serialize(this->__serialize());
      }
  
      /**
@@ -347,21 +347,19 @@
       */
      public function unserialize(string serialized) -> void
      {
-         var data;
- 
-         let data = unserialize(serialized);
- 
-         this->init(data);
+         this->__unserialize(unserialize(serialized));
      }
  
      public function __serialize() -> array
      {
-         return this->toArray();
+         return [this->insensitive, this->data, this->lowerKeys];
      }
  
      public function __unserialize(array data) -> void
      {
-         this->init(data);
+         let this->insensitive = data[0];
+         let this->data = data[1];
+         let this->lowerKeys = data[2];
      }
  
      /**
