@@ -19,6 +19,7 @@
 
 namespace Phalcon\Di;
 
+use stdClass;
 use Phalcon\Di;
 use Phalcon\DiInterface;
 use Phalcon\Events\ManagerInterface;
@@ -58,7 +59,7 @@ use Phalcon\Session\BagInterface;
  * @property \Phalcon\Session\Bag|\Phalcon\Session\BagInterface $persistent
  * @property \Phalcon\Mvc\View|\Phalcon\Mvc\ViewInterface $view
  */
-abstract class Injectable implements InjectionAwareInterface, EventsAwareInterface
+abstract class Injectable extends stdClass implements InjectionAwareInterface, EventsAwareInterface
 {
 
 	/**
@@ -74,28 +75,6 @@ abstract class Injectable implements InjectionAwareInterface, EventsAwareInterfa
 	 * @var \Phalcon\Events\ManagerInterface
 	 */
 	protected _eventsManager;
-
-	/**
-	 * Sets the dependency injector
-	 */
-	public function setDI(<DiInterface> dependencyInjector)
-	{
-		let this->_dependencyInjector = dependencyInjector;
-	}
-
-	/**
-	 * Returns the internal dependency injector
-	 */
-	public function getDI() -> <DiInterface>
-	{
-		var dependencyInjector;
-
-		let dependencyInjector = this->_dependencyInjector;
-		if typeof dependencyInjector != "object" {
-			let dependencyInjector = Di::getDefault();
-		}
-		return dependencyInjector;
-	}
 
 	/**
 	 * Sets the event manager
@@ -120,13 +99,7 @@ abstract class Injectable implements InjectionAwareInterface, EventsAwareInterfa
 	{
 		var dependencyInjector, service, persistent;
 
-		let dependencyInjector = <DiInterface> this->_dependencyInjector;
-		if typeof dependencyInjector != "object" {
-			let dependencyInjector = \Phalcon\Di::getDefault();
-			if typeof dependencyInjector != "object" {
-				throw new Exception("A dependency injection object is required to access the application services");
-			}
-		}
+		let dependencyInjector = this->getDI();
 
 		/**
 		 * Fallback to the PHP userland if the cache is not available
@@ -138,7 +111,7 @@ abstract class Injectable implements InjectionAwareInterface, EventsAwareInterfa
 		}
 
 		if propertyName == "di" {
-			// let this->{"di"} = dependencyInjector;
+			let this->{"di"} = dependencyInjector;
 			return dependencyInjector;
 		}
 
@@ -156,5 +129,38 @@ abstract class Injectable implements InjectionAwareInterface, EventsAwareInterfa
 		 */
 		trigger_error("Access to undefined property " . propertyName);
 		return null;
+	}
+
+	/**
+	 * Returns the internal dependency injector
+	 */
+	public function getDI() -> <DiInterface>
+	{
+		var dependencyInjector;
+
+		let dependencyInjector = this->_dependencyInjector;
+		if typeof dependencyInjector != "object" {
+			let dependencyInjector = Di::getDefault();
+
+			if unlikely typeof dependencyInjector != "object" {
+				throw new Exception(
+					"A dependency injection container is required to access internal services"
+				);
+			}
+
+			/**
+			 * Set container for future reuse on next `getDI()` calls.
+			 */
+			this->setDI(dependencyInjector);
+		}
+		return dependencyInjector;
+	}
+
+	/**
+	 * Sets the dependency injector
+	 */
+	public function setDI(<DiInterface> dependencyInjector)
+	{
+		let this->_dependencyInjector = dependencyInjector;
 	}
 }
