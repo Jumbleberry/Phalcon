@@ -20,6 +20,7 @@
 
 namespace Phalcon\Mvc;
 
+use stdClass;
 use Phalcon\Di;
 use Phalcon\Db\Column;
 use Phalcon\Db\RawValue;
@@ -83,7 +84,7 @@ use Phalcon\Events\ManagerInterface as EventsManagerInterface;
  * }
  * </code>
  */
-abstract class Model implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \JsonSerializable
+abstract class Model extends stdClass implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \JsonSerializable
 {
 	protected _dependencyInjector;
 
