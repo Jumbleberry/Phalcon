@@ -66,13 +66,11 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, setDirtyState)
 /**
  * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
  * Checks whether offset exists in the row
- *
- * @param string|int $index
- * @return boolean
  */
 PHP_METHOD(Phalcon_Mvc_Model_Row, offsetExists)
 {
-	zval *index, index_sub;
+	zval index_sub;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -92,15 +90,13 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, offsetExists)
 
 /**
  * Gets a record in a specific position of the row
- *
- * @param string|int index
- * @return string|Phalcon\Mvc\ModelInterface
  */
 PHP_METHOD(Phalcon_Mvc_Model_Row, offsetGet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *index, index_sub, _0, _1;
+	zval index_sub, _0, _1;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -121,7 +117,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, offsetGet)
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "offsetexists", NULL, 0, index);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_model_exception_ce, "The index does not exist in the row", "phalcon/mvc/model/row.zep", 67);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_mvc_model_exception_ce, "The index does not exist in the row", "phalcon/mvc/model/row.zep", 61);
 		return;
 	}
 	ZEPHIR_OBS_VAR(&_1);
@@ -131,9 +127,6 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, offsetGet)
 
 /**
  * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
- *
- * @param string|int index
- * @param \Phalcon\Mvc\ModelInterface value
  */
 PHP_METHOD(Phalcon_Mvc_Model_Row, offsetSet)
 {
@@ -155,14 +148,12 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, offsetSet)
 	zephir_fetch_params_without_memory_grow(2, 0, &element, &value);
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_mvc_model_exception_ce, "Row is an immutable ArrayAccess object", "phalcon/mvc/model/row.zep", 81);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_mvc_model_exception_ce, "Row is an immutable ArrayAccess object", "phalcon/mvc/model/row.zep", 72);
 	return;
 }
 
 /**
  * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
- *
- * @param string|int offset
  */
 PHP_METHOD(Phalcon_Mvc_Model_Row, offsetUnset)
 {
@@ -182,7 +173,7 @@ PHP_METHOD(Phalcon_Mvc_Model_Row, offsetUnset)
 	zephir_fetch_params_without_memory_grow(1, 0, &element);
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_mvc_model_exception_ce, "Row is an immutable ArrayAccess object", "phalcon/mvc/model/row.zep", 91);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_mvc_model_exception_ce, "Row is an immutable ArrayAccess object", "phalcon/mvc/model/row.zep", 80);
 	return;
 }
 

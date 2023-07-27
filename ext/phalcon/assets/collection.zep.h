@@ -129,7 +129,11 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_assets_collection_current, 0, 0, Phalcon\\Assets\\Resource, 0)
 ZEND_END_ARG_INFO()
 
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_assets_collection_key, 0, 0, IS_MIXED, 0)
+#else
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_assets_collection_key, 0, 0, 0)
+#endif
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_assets_collection_next, 0, 0, IS_VOID, 0)
@@ -265,11 +269,7 @@ ZEPHIR_INIT_FUNCS(phalcon_assets_collection_method_entry) {
 	PHP_ME(Phalcon_Assets_Collection, count, arginfo_phalcon_assets_collection_count, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Assets_Collection, rewind, arginfo_phalcon_assets_collection_rewind, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Assets_Collection, current, arginfo_phalcon_assets_collection_current, ZEND_ACC_PUBLIC)
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Assets_Collection, key, arginfo_phalcon_assets_collection_key, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Assets_Collection, key, NULL, ZEND_ACC_PUBLIC)
-#endif
 	PHP_ME(Phalcon_Assets_Collection, next, arginfo_phalcon_assets_collection_next, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Assets_Collection, valid, arginfo_phalcon_assets_collection_valid, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Assets_Collection, setTargetPath, arginfo_phalcon_assets_collection_settargetpath, ZEND_ACC_PUBLIC)

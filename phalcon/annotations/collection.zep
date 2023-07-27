@@ -87,10 +87,8 @@ class Collection implements \Iterator, \Countable
 
 	/**
 	 * Returns the current annotation in the iterator
-	 *
-	 * @return \Phalcon\Annotations\Annotation
 	 */
-	public function current() -> <Annotation> | boolean
+	public function current() -> mixed
 	{
 		var annotation;
 		if fetch annotation, this->_annotations[this->_position] {

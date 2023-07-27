@@ -329,7 +329,7 @@ class Di implements DiInterface
 	/**
 	 * Check if a service is registered using the array syntax
 	 */
-	public function offsetExists(name) -> boolean
+	public function offsetExists(mixed name) -> bool
 	{
 		return this->has(name);
 	}
@@ -341,10 +341,9 @@ class Di implements DiInterface
 	 * $di["request"] = new \Phalcon\Http\Request();
 	 *</code>
 	 */
-	public function offsetSet(name, var definition) -> boolean
+	public function offsetSet(mixed name, mixed definition) -> void
 	{
 		this->setShared(name, definition);
-		return true;
 	}
 
 	/**
@@ -354,7 +353,7 @@ class Di implements DiInterface
 	 * var_dump($di["request"]);
 	 *</code>
 	 */
-	public function offsetGet(name) -> var
+	public function offsetGet(mixed name) -> mixed
 	{
 		return this->getShared(name);
 	}
@@ -362,9 +361,9 @@ class Di implements DiInterface
 	/**
 	 * Removes a service from the services container using the array syntax
 	 */
-	public function offsetUnset(name) -> boolean
+	public function offsetUnset(mixed name) -> void
 	{
-		return false;
+		this->remove(name);
 	}
 
 	/**

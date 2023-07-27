@@ -679,7 +679,8 @@ PHP_METHOD(Phalcon_Session_Bag, offsetSet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *property, property_sub, *value, value_sub;
+	zval property_sub, value_sub;
+	zval *property, *value;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&property_sub);
@@ -697,16 +698,17 @@ PHP_METHOD(Phalcon_Session_Bag, offsetSet)
 	zephir_fetch_params(1, 2, 0, &property, &value);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "set", NULL, 0, property, value);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, property, value);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 }
 
 PHP_METHOD(Phalcon_Session_Bag, offsetExists)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *property, property_sub;
+	zval property_sub;
+	zval *property;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&property_sub);
@@ -731,7 +733,8 @@ PHP_METHOD(Phalcon_Session_Bag, offsetUnset)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *property, property_sub;
+	zval property_sub;
+	zval *property;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&property_sub);
@@ -747,16 +750,17 @@ PHP_METHOD(Phalcon_Session_Bag, offsetUnset)
 	zephir_fetch_params(1, 1, 0, &property);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "remove", NULL, 0, property);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "remove", NULL, 0, property);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 }
 
 PHP_METHOD(Phalcon_Session_Bag, offsetGet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *property, property_sub;
+	zval property_sub;
+	zval *property;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&property_sub);

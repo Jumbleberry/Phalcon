@@ -199,13 +199,11 @@ PHP_METHOD(Phalcon_Translate_Adapter, _)
 
 /**
  * Sets a translation value
- *
- * @param string offset
- * @param string value
  */
 PHP_METHOD(Phalcon_Translate_Adapter, offsetSet)
 {
-	zval *offset, offset_sub, *value, value_sub;
+	zval offset_sub, value_sub;
+	zval *offset, *value;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&offset_sub);
@@ -222,7 +220,7 @@ PHP_METHOD(Phalcon_Translate_Adapter, offsetSet)
 	zephir_fetch_params_without_memory_grow(2, 0, &offset, &value);
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_translate_exception_ce, "Translate is an immutable ArrayAccess object", "phalcon/translate/adapter.zep", 86);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_translate_exception_ce, "Translate is an immutable ArrayAccess object", "phalcon/translate/adapter.zep", 83);
 	return;
 }
 
@@ -256,12 +254,11 @@ PHP_METHOD(Phalcon_Translate_Adapter, offsetExists)
 
 /**
  * Unsets a translation from the dictionary
- *
- * @param string offset
  */
 PHP_METHOD(Phalcon_Translate_Adapter, offsetUnset)
 {
-	zval *offset, offset_sub;
+	zval offset_sub;
+	zval *offset;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&offset_sub);
@@ -276,21 +273,19 @@ PHP_METHOD(Phalcon_Translate_Adapter, offsetUnset)
 	zephir_fetch_params_without_memory_grow(1, 0, &offset);
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_translate_exception_ce, "Translate is an immutable ArrayAccess object", "phalcon/translate/adapter.zep", 104);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_translate_exception_ce, "Translate is an immutable ArrayAccess object", "phalcon/translate/adapter.zep", 99);
 	return;
 }
 
 /**
  * Returns the translation related to the given key
- *
- * @param  string translateKey
- * @return string
  */
 PHP_METHOD(Phalcon_Translate_Adapter, offsetGet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *translateKey, translateKey_sub, _0;
+	zval translateKey_sub, _0;
+	zval *translateKey;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&translateKey_sub);

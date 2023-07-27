@@ -1890,15 +1890,13 @@ PHP_METHOD(Phalcon_Mvc_Micro, getReturnedValue)
 
 /**
  * Check if a service is registered in the internal services container using the array syntax
- *
- * @param string alias
- * @return boolean
  */
 PHP_METHOD(Phalcon_Mvc_Micro, offsetExists)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *alias, alias_sub;
+	zval alias_sub;
+	zval *alias;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&alias_sub);
@@ -1925,15 +1923,13 @@ PHP_METHOD(Phalcon_Mvc_Micro, offsetExists)
  *<code>
  *	$app["request"] = new \Phalcon\Http\Request();
  *</code>
- *
- * @param string alias
- * @param mixed definition
  */
 PHP_METHOD(Phalcon_Mvc_Micro, offsetSet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *alias, alias_sub, *definition, definition_sub;
+	zval alias_sub, definition_sub;
+	zval *alias, *definition;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&alias_sub);
@@ -1964,15 +1960,13 @@ PHP_METHOD(Phalcon_Mvc_Micro, offsetSet)
  *     $app["request"]
  * );
  *</code>
- *
- * @param string alias
- * @return mixed
  */
 PHP_METHOD(Phalcon_Mvc_Micro, offsetGet)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *alias, alias_sub;
+	zval alias_sub;
+	zval *alias;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&alias_sub);
@@ -2000,7 +1994,8 @@ PHP_METHOD(Phalcon_Mvc_Micro, offsetGet)
  */
 PHP_METHOD(Phalcon_Mvc_Micro, offsetUnset)
 {
-	zval *alias, alias_sub;
+	zval alias_sub;
+	zval *alias;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&alias_sub);
@@ -2015,8 +2010,6 @@ PHP_METHOD(Phalcon_Mvc_Micro, offsetUnset)
 	zephir_fetch_params_without_memory_grow(1, 0, &alias);
 
 
-	RETVAL_ZVAL(alias, 1, 0);
-	return;
 }
 
 /**

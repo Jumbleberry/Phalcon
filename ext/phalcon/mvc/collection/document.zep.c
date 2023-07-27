@@ -44,7 +44,8 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Collection_Document)
  */
 PHP_METHOD(Phalcon_Mvc_Collection_Document, offsetExists)
 {
-	zval *index, index_sub;
+	zval index_sub;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -98,7 +99,8 @@ PHP_METHOD(Phalcon_Mvc_Collection_Document, offsetGet)
  */
 PHP_METHOD(Phalcon_Mvc_Collection_Document, offsetSet)
 {
-	zval *index, index_sub, *value, value_sub;
+	zval index_sub, value_sub;
+	zval *index, *value;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -125,7 +127,8 @@ PHP_METHOD(Phalcon_Mvc_Collection_Document, offsetSet)
  */
 PHP_METHOD(Phalcon_Mvc_Collection_Document, offsetUnset)
 {
-	zval *offset, offset_sub;
+	zval offset_sub;
+	zval *offset;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&offset_sub);

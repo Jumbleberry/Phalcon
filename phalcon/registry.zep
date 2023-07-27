@@ -93,7 +93,7 @@ final class Registry implements \ArrayAccess, \Countable, \Iterator
 	/**
 	 * Returns an index in the registry
 	 */
-	public final function offsetGet(var offset) -> var
+	public final function offsetGet(var offset) -> mixed
 	{
 		return this->_data[offset];
 	}
@@ -157,7 +157,7 @@ final class Registry implements \ArrayAccess, \Countable, \Iterator
 	/**
 	 * Obtains the current value in the internal iterator
 	 */
-	public function current()
+	public function current() -> mixed
 	{
 		return current(this->_data);
 	}

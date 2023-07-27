@@ -736,7 +736,7 @@ class Form extends Injectable implements \Countable, \Iterator
 	/**
 	 * Returns the current element in the iterator
 	 */
-	public function current() -> <ElementInterface> | boolean
+	public function current() -> mixed
 	{
 		var element;
 

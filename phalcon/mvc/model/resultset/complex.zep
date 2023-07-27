@@ -62,7 +62,7 @@ class Complex extends Resultset implements ResultsetInterface
 	/**
 	 * Returns current row in the resultset
 	 */
-	public final function current() -> <ModelInterface> | boolean
+	final public function current() -> mixed
 	{
 		var row, hydrateMode, eager,
 			dirtyState, alias, activeRow, type, column, columnValue,

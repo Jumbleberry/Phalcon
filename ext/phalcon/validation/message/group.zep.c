@@ -15,9 +15,9 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/array.h"
+#include "kernel/operators.h"
 #include "kernel/exception.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
 #include "ext/spl/spl_exceptions.h"
 
 
@@ -81,13 +81,11 @@ PHP_METHOD(Phalcon_Validation_Message_Group, __construct)
  *     $messages[0]
  * );
  *</code>
- *
- * @param int index
- * @return \Phalcon\Validation\Message
  */
 PHP_METHOD(Phalcon_Validation_Message_Group, offsetGet)
 {
-	zval *index, index_sub, message, _0;
+	zval index_sub, message, _0;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -117,17 +115,17 @@ PHP_METHOD(Phalcon_Validation_Message_Group, offsetGet)
  *<code>
  * $messages[0] = new \Phalcon\Validation\Message("This is a message");
  *</code>
- *
- * @param int index
- * @param \Phalcon\Validation\Message message
  */
 PHP_METHOD(Phalcon_Validation_Message_Group, offsetSet)
 {
-	zval *index, index_sub, *message, message_sub;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval index_sub, message_sub, _0;
+	zval *index, *message;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
 	ZVAL_UNDEF(&message_sub);
+	ZVAL_UNDEF(&_0);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(2, 2)
@@ -137,14 +135,18 @@ PHP_METHOD(Phalcon_Validation_Message_Group, offsetSet)
 #endif
 
 
-	zephir_fetch_params_without_memory_grow(2, 0, &index, &message);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &index, &message);
 
 
-	if (Z_TYPE_P(message) != IS_OBJECT) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(phalcon_validation_exception_ce, "The message must be an object", "phalcon/validation/message/group.zep", 84);
+	ZEPHIR_INIT_VAR(&_0);
+	zephir_gettype(&_0, message);
+	if (!ZEPHIR_IS_STRING(&_0, "object")) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_validation_exception_ce, "The message must be an object", "phalcon/validation/message/group.zep", 78);
 		return;
 	}
 	zephir_update_property_array(this_ptr, SL("_messages"), index, message);
+	ZEPHIR_MM_RESTORE();
 }
 
 /**
@@ -155,13 +157,11 @@ PHP_METHOD(Phalcon_Validation_Message_Group, offsetSet)
  *     isset($message["database"])
  * );
  *</code>
- *
- * @param int index
- * @return boolean
  */
 PHP_METHOD(Phalcon_Validation_Message_Group, offsetExists)
 {
-	zval *index, index_sub, _0;
+	zval index_sub, _0;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -192,7 +192,8 @@ PHP_METHOD(Phalcon_Validation_Message_Group, offsetUnset)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *index, index_sub, _0, _1$$3, _2$$3;
+	zval index_sub, _0, _1$$3, _2$$3;
+	zval *index;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&index_sub);
@@ -292,7 +293,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, appendMessages)
 		_0 = Z_TYPE_P(messages) != IS_OBJECT;
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_validation_exception_ce, "The messages must be array or object", "phalcon/validation/message/group.zep", 148);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_validation_exception_ce, "The messages must be array or object", "phalcon/validation/message/group.zep", 139);
 		return;
 	}
 	ZEPHIR_OBS_VAR(&currentMessages);
@@ -372,7 +373,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, filter)
 	ZEPHIR_OBS_VAR(&messages);
 	zephir_read_property(&messages, this_ptr, ZEND_STRL("_messages"), PH_NOISY_CC);
 	if (Z_TYPE_P(&messages) == IS_ARRAY) {
-		zephir_is_iterable(&messages, 0, "phalcon/validation/message/group.zep", 210);
+		zephir_is_iterable(&messages, 0, "phalcon/validation/message/group.zep", 201);
 		if (Z_TYPE_P(&messages) == IS_ARRAY) {
 			ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&messages), _0$$3)
 			{
@@ -382,7 +383,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, filter)
 					ZEPHIR_CALL_METHOD(&_2$$5, &message, "getfield", NULL, 0);
 					zephir_check_call_status();
 					if (ZEPHIR_IS_EQUAL(&fieldName, &_2$$5)) {
-						zephir_array_append(&filtered, &message, PH_SEPARATE, "phalcon/validation/message/group.zep", 206);
+						zephir_array_append(&filtered, &message, PH_SEPARATE, "phalcon/validation/message/group.zep", 197);
 					}
 				}
 			} ZEND_HASH_FOREACH_END();
@@ -401,7 +402,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, filter)
 						ZEPHIR_CALL_METHOD(&_3$$8, &message, "getfield", NULL, 0);
 						zephir_check_call_status();
 						if (ZEPHIR_IS_EQUAL(&fieldName, &_3$$8)) {
-							zephir_array_append(&filtered, &message, PH_SEPARATE, "phalcon/validation/message/group.zep", 206);
+							zephir_array_append(&filtered, &message, PH_SEPARATE, "phalcon/validation/message/group.zep", 197);
 						}
 					}
 				ZEPHIR_CALL_METHOD(NULL, &messages, "next", NULL, 0);
@@ -465,7 +466,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, current)
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("_messages"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_2);
 	zephir_read_property(&_2, this_ptr, ZEND_STRL("_position"), PH_NOISY_CC);
-	zephir_array_fetch(&_1, &_0, &_2, PH_NOISY | PH_READONLY, "phalcon/validation/message/group.zep", 236);
+	zephir_array_fetch(&_1, &_0, &_2, PH_NOISY | PH_READONLY, "phalcon/validation/message/group.zep", 227);
 	RETURN_CTOR(&_1);
 }
 
@@ -539,7 +540,7 @@ PHP_METHOD(Phalcon_Validation_Message_Group, __set_state)
 
 
 	object_init_ex(return_value, phalcon_validation_message_group_ce);
-	zephir_array_fetch_string(&_0, group, SL("_messages"), PH_NOISY | PH_READONLY, "phalcon/validation/message/group.zep", 271);
+	zephir_array_fetch_string(&_0, group, SL("_messages"), PH_NOISY | PH_READONLY, "phalcon/validation/message/group.zep", 262);
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 2, &_0);
 	zephir_check_call_status();
 	RETURN_MM();

@@ -64,7 +64,7 @@ class Simple extends Resultset
 	/**
 	 * Returns current row in the resultset
 	 */
-	public final function current() -> <ModelInterface> | boolean
+	final public function current() -> mixed
 	{
 		var row, hydrateMode, columnMap, activeRow, modelName;
 

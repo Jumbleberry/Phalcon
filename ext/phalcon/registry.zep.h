@@ -26,7 +26,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_registry_offsetexists, 0
 	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_registry_offsetget, 0, 1, IS_MIXED, 0)
+#else
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_registry_offsetget, 0, 0, 1)
+#endif
 	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
@@ -56,7 +60,11 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_registry_valid, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_registry_current, 0, 0, IS_MIXED, 0)
+#else
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_registry_current, 0, 0, 0)
+#endif
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_registry___set, 0, 2, IS_VOID, 0)
@@ -93,11 +101,7 @@ ZEPHIR_INIT_FUNCS(phalcon_registry_method_entry) {
 	PHP_ME(Phalcon_Registry, key, arginfo_phalcon_registry_key, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)
 	PHP_ME(Phalcon_Registry, rewind, arginfo_phalcon_registry_rewind, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)
 	PHP_ME(Phalcon_Registry, valid, arginfo_phalcon_registry_valid, ZEND_ACC_PUBLIC)
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Registry, current, arginfo_phalcon_registry_current, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Registry, current, NULL, ZEND_ACC_PUBLIC)
-#endif
 	PHP_ME(Phalcon_Registry, __set, arginfo_phalcon_registry___set, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)
 	PHP_ME(Phalcon_Registry, __get, arginfo_phalcon_registry___get, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)
 	PHP_ME(Phalcon_Registry, __isset, arginfo_phalcon_registry___isset, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)
