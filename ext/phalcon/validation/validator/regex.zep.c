@@ -15,8 +15,8 @@
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "kernel/array.h"
-#include "kernel/string.h"
 #include "kernel/operators.h"
+#include "kernel/string.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
 #include "kernel/object.h"
@@ -78,8 +78,8 @@ PHP_METHOD(Phalcon_Validation_Validator_Regex, validate)
 	zend_bool failed = 0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval field;
-	zval *validation, validation_sub, *field_param = NULL, matches, message, value, label, replacePairs, code, pattern, _0, _1$$3, _2$$4, _3$$6, _4$$6, _5$$6;
+	zval field, _2;
+	zval *validation, validation_sub, *field_param = NULL, matches, message, value, label, replacePairs, code, pattern, _0, _1$$3, _3$$4, _4$$6, _5$$6, _6$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&validation_sub);
@@ -92,11 +92,12 @@ PHP_METHOD(Phalcon_Validation_Validator_Regex, validate)
 	ZVAL_UNDEF(&pattern);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$4);
-	ZVAL_UNDEF(&_3$$6);
+	ZVAL_UNDEF(&_3$$4);
 	ZVAL_UNDEF(&_4$$6);
 	ZVAL_UNDEF(&_5$$6);
+	ZVAL_UNDEF(&_6$$6);
 	ZVAL_UNDEF(&field);
+	ZVAL_UNDEF(&_2);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(2, 2)
@@ -131,35 +132,36 @@ PHP_METHOD(Phalcon_Validation_Validator_Regex, validate)
 		zephir_array_fetch(&_1$$3, &pattern, &field, PH_NOISY | PH_READONLY, "phalcon/validation/validator/regex.zep", 84);
 		ZEPHIR_CPY_WRT(&pattern, &_1$$3);
 	}
+	zephir_cast_to_string(&_2, &value);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_preg_match(&_0, &pattern, &value, &matches, 0, 0 , 0 );
+	zephir_preg_match(&_0, &pattern, &_2, &matches, 0, 0 , 0 );
 	if (zephir_is_true(&_0)) {
-		zephir_array_fetch_long(&_2$$4, &matches, 0, PH_NOISY | PH_READONLY, "phalcon/validation/validator/regex.zep", 88);
-		failed = !ZEPHIR_IS_EQUAL(&_2$$4, &value);
+		zephir_array_fetch_long(&_3$$4, &matches, 0, PH_NOISY | PH_READONLY, "phalcon/validation/validator/regex.zep", 88);
+		failed = !ZEPHIR_IS_EQUAL(&_3$$4, &value);
 	} else {
 		failed = 1;
 	}
 	if (failed == 1) {
 		ZEPHIR_CALL_METHOD(&label, this_ptr, "preparelabel", NULL, 0, validation, &field);
 		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_3$$6);
-		ZVAL_STRING(&_3$$6, "Regex");
-		ZEPHIR_CALL_METHOD(&message, this_ptr, "preparemessage", NULL, 0, validation, &field, &_3$$6);
+		ZEPHIR_INIT_VAR(&_4$$6);
+		ZVAL_STRING(&_4$$6, "Regex");
+		ZEPHIR_CALL_METHOD(&message, this_ptr, "preparemessage", NULL, 0, validation, &field, &_4$$6);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(&code, this_ptr, "preparecode", NULL, 0, &field);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&replacePairs);
 		zephir_create_array(&replacePairs, 1, 0);
 		zephir_array_update_string(&replacePairs, SL(":field"), &label, PH_COPY | PH_SEPARATE);
-		ZEPHIR_INIT_NVAR(&_3$$6);
-		object_init_ex(&_3$$6, phalcon_validation_message_ce);
-		ZEPHIR_CALL_FUNCTION(&_4$$6, "strtr", NULL, 26, &message, &replacePairs);
+		ZEPHIR_INIT_NVAR(&_4$$6);
+		object_init_ex(&_4$$6, phalcon_validation_message_ce);
+		ZEPHIR_CALL_FUNCTION(&_5$$6, "strtr", NULL, 26, &message, &replacePairs);
 		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_5$$6);
-		ZVAL_STRING(&_5$$6, "Regex");
-		ZEPHIR_CALL_METHOD(NULL, &_3$$6, "__construct", NULL, 443, &_4$$6, &field, &_5$$6, &code);
+		ZEPHIR_INIT_VAR(&_6$$6);
+		ZVAL_STRING(&_6$$6, "Regex");
+		ZEPHIR_CALL_METHOD(NULL, &_4$$6, "__construct", NULL, 443, &_5$$6, &field, &_6$$6, &code);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, validation, "appendmessage", NULL, 0, &_3$$6);
+		ZEPHIR_CALL_METHOD(NULL, validation, "appendmessage", NULL, 0, &_4$$6);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(0);
 	}

@@ -84,7 +84,7 @@ class Regex extends Validator
 			let pattern = pattern[field];
 		}
 
-		if preg_match(pattern, value, matches) {
+		if preg_match(pattern, (string) value, matches) {
 			let failed = matches[0] != value;
 		} else {
 			let failed = true;

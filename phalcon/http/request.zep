@@ -1236,10 +1236,14 @@ class Request implements RequestInterface, InjectionAwareInterface
 	 */
 	protected final function _getQualityHeader(string! serverIndex, string! name) -> array
 	{
-		var returnedParts, part, headerParts, headerPart, split;
+		var returnedParts, part, headerParts, headerPart, serverValue, split;
 
-		let returnedParts = [];
-		for part in preg_split("/,\\s*/", this->getServer(serverIndex), -1, PREG_SPLIT_NO_EMPTY) {
+		let returnedParts = [],
+			serverValue   = this->getServer(serverIndex);
+
+		let serverValue = (null === serverValue) ? "" : serverValue;
+
+		for part in preg_split("/,\\s*/", serverValue, -1, PREG_SPLIT_NO_EMPTY) {
 
 			let headerParts = [];
 			for headerPart in preg_split("/\s*;\s*/", trim(part), -1, PREG_SPLIT_NO_EMPTY) {

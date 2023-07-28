@@ -93,7 +93,7 @@ class Regex extends Validator
 		 */
 		let failed = false;
 		let matches = null;
-		if preg_match(pattern, value, matches) {
+		if preg_match(pattern, (string) value, matches) {
 			let failed = matches[0] != value;
 		} else {
 			let failed = true;

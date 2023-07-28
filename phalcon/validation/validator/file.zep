@@ -168,7 +168,7 @@ class File extends Validator
 				let maxSize = maxSize[field];
 			}
 
-			preg_match("/^([0-9]+(?:\\.[0-9]+)?)(".implode("|", array_keys(byteUnits)).")?$/Di", maxSize, matches);
+			preg_match("/^([0-9]+(?:\\.[0-9]+)?)(".implode("|", array_keys(byteUnits)).")?$/Di", (string) maxSize, matches);
 
 			if isset matches[2] {
 				let unit = matches[2];

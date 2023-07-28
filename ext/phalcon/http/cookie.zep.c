@@ -1067,15 +1067,16 @@ PHP_METHOD(Phalcon_Http_Cookie, assertSignKeyIsLongEnough)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *signKey_param = NULL, length, _0$$3, _1$$3, _2$$3;
-	zval signKey;
+	zval *signKey_param = NULL, length, _1$$3, _2$$3, _3$$3;
+	zval signKey, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&signKey);
+	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&length);
-	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -1097,18 +1098,19 @@ PHP_METHOD(Phalcon_Http_Cookie, assertSignKeyIsLongEnough)
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&length, "mb_strlen", NULL, 210, &signKey);
+	zephir_cast_to_string(&_0, &signKey);
+	ZEPHIR_CALL_FUNCTION(&length, "mb_strlen", NULL, 210, &_0);
 	zephir_check_call_status();
 	if (ZEPHIR_LT_LONG(&length, 32)) {
-		ZEPHIR_INIT_VAR(&_0$$3);
-		object_init_ex(&_0$$3, phalcon_http_cookie_exception_ce);
 		ZEPHIR_INIT_VAR(&_1$$3);
-		ZVAL_STRING(&_1$$3, "The cookie's key should be at least 32 characters long. Current length is %d.");
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", NULL, 156, &_1$$3, &length);
+		object_init_ex(&_1$$3, phalcon_http_cookie_exception_ce);
+		ZEPHIR_INIT_VAR(&_2$$3);
+		ZVAL_STRING(&_2$$3, "The cookie's key should be at least 32 characters long. Current length is %d.");
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 156, &_2$$3, &length);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 4, &_2$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 4, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "phalcon/http/cookie.zep", 583);
+		zephir_throw_exception_debug(&_1$$3, "phalcon/http/cookie.zep", 583);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

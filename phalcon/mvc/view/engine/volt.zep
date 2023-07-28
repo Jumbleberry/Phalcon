@@ -132,7 +132,7 @@ class Volt extends Engine
 		}
 
 		if function_exists("mb_strlen") {
-			return mb_strlen(item);
+			return mb_strlen((string) item);
 		}
 
 		return strlen(item);
