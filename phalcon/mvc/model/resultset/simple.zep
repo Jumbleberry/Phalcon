@@ -222,10 +222,15 @@ class Simple extends Resultset
 		return records;
 	}
 
+	public function serialize() -> string
+	{
+		return serialize(this->_serialize());
+	}
+
 	/**
 	 * Serializing a resultset will dump all related rows into a big array
 	 */
-	public function __serialize() -> array
+	public function _serialize() -> array
 	{
 		/**
 		 * Serialize the cache using the serialize function
@@ -240,10 +245,15 @@ class Simple extends Resultset
 		];
 	}
 
+	public function unserialize(var data) -> void
+	{
+		this->__unserialize(unserialize(data));
+	}
+
 	/**
 	 * Unserializing a resultset will allow to only works on the rows present in the saved state
 	 */
-	public function __unserialize(var data) -> void
+	public function __unserialize(array data) -> void
 	{
 		var keepSnapshots;
 

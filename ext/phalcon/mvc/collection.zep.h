@@ -50,7 +50,9 @@ PHP_METHOD(Phalcon_Mvc_Collection, getDirtyState);
 PHP_METHOD(Phalcon_Mvc_Collection, addBehavior);
 PHP_METHOD(Phalcon_Mvc_Collection, skipOperation);
 PHP_METHOD(Phalcon_Mvc_Collection, toArray);
-PHP_METHOD(Phalcon_Mvc_Collection, __serialize);
+PHP_METHOD(Phalcon_Mvc_Collection, serialize);
+PHP_METHOD(Phalcon_Mvc_Collection, _serialize);
+PHP_METHOD(Phalcon_Mvc_Collection, unserialize);
 PHP_METHOD(Phalcon_Mvc_Collection, __unserialize);
 zend_object *zephir_init_properties_Phalcon_Mvc_Collection(zend_class_entry *class_type);
 
@@ -261,12 +263,25 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection_toarray, 0, 0, IS_ARRAY, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection___serialize, 0, 0, IS_ARRAY, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection_serialize, 0, 0, IS_STRING, 0)
 ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection__serialize, 0, 0, IS_ARRAY, 0)
+ZEND_END_ARG_INFO()
+
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection_unserialize, 0, 1, IS_VOID, 0)
+    ZEND_ARG_TYPE_INFO(0, serialized, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+#else
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection_unserialize, 0, 1, IS_VOID, 0)
+    ZEND_ARG_INFO(0, serialized)
+ZEND_END_ARG_INFO()
+#endif
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_mvc_collection___unserialize, 0, 1, IS_VOID, 0)
 
-	ZEND_ARG_INFO(0, data)
+	ZEND_ARG_ARRAY_INFO(0, data, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_mvc_collection_zephir_init_properties_phalcon_mvc_collection, 0, 0, 0)
@@ -332,7 +347,9 @@ ZEPHIR_INIT_FUNCS(phalcon_mvc_collection_method_entry) {
 	PHP_ME(Phalcon_Mvc_Collection, addBehavior, arginfo_phalcon_mvc_collection_addbehavior, ZEND_ACC_PROTECTED)
 	PHP_ME(Phalcon_Mvc_Collection, skipOperation, arginfo_phalcon_mvc_collection_skipoperation, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Collection, toArray, arginfo_phalcon_mvc_collection_toarray, ZEND_ACC_PUBLIC)
-	PHP_ME(Phalcon_Mvc_Collection, __serialize, arginfo_phalcon_mvc_collection___serialize, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Mvc_Collection, serialize, arginfo_phalcon_mvc_collection_serialize, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Mvc_Collection, _serialize, arginfo_phalcon_mvc_collection__serialize, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Mvc_Collection, unserialize, arginfo_phalcon_mvc_collection_unserialize, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Mvc_Collection, __unserialize, arginfo_phalcon_mvc_collection___unserialize, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };
