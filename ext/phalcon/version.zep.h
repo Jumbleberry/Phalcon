@@ -9,7 +9,7 @@ PHP_METHOD(Phalcon_Version, get);
 PHP_METHOD(Phalcon_Version, getId);
 PHP_METHOD(Phalcon_Version, getPart);
 
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_version__getversion, 0, 0, IS_ARRAY, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_version__getversion, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_version__getspecial, 0, 1, IS_STRING, 0)
@@ -27,7 +27,11 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_version_getpart, 0, 1, I
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_version_method_entry) {
+#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Version, _getVersion, arginfo_phalcon_version__getversion, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
+#else
+	PHP_ME(Phalcon_Version, _getVersion, NULL, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
+#endif
 	PHP_ME(Phalcon_Version, _getSpecial, arginfo_phalcon_version__getspecial, ZEND_ACC_PROTECTED|ZEND_ACC_FINAL|ZEND_ACC_STATIC)
 	PHP_ME(Phalcon_Version, get, arginfo_phalcon_version_get, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Phalcon_Version, getId, arginfo_phalcon_version_getid, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)

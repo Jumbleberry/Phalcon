@@ -92,8 +92,10 @@ class Version
 	 * C - Min version (two digits)
 	 * D - Special release: 1 = Alpha, 2 = Beta, 3 = RC, 4 = Stable
 	 * E - Special release version i.e. RC1, Beta2 etc.
+	 *
+	 * @return array
 	 */
-	protected static function _getVersion() -> array
+	protected static function _getVersion()
 	{
 		return [3, 4, 5, 4, 0];
 	}
