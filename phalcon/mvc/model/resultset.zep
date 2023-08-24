@@ -69,7 +69,7 @@ use Phalcon\Mvc\Model\ResultsetInterface;
  * </code>
  */
 abstract class Resultset
-	implements ResultsetInterface, \Iterator, \SeekableIterator, \ArrayAccess, \Serializable, \JsonSerializable
+	implements ResultsetInterface, \Iterator, \SeekableIterator, \ArrayAccess, \JsonSerializable
 {
 
 	/**

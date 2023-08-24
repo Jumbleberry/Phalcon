@@ -37,7 +37,7 @@ use Phalcon\ValidationInterface;
  * This component implements a high level abstraction for NoSQL databases which
  * works with documents
  */
-abstract class Collection implements EntityInterface, CollectionInterface, InjectionAwareInterface, \Serializable
+abstract class Collection implements EntityInterface, CollectionInterface, InjectionAwareInterface
 {
 
 	public _id;
@@ -1635,15 +1635,10 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 		return data;
 	}
 
-	public function serialize() -> string
-	{
-		return serialize(this->_serialize());
-	}
-
 	/**
 	 * Serializes the object ignoring connections or protected properties
 	 */
-	public function _serialize() -> array
+	public function __serialize() -> array
 	{
 		/**
 		 * Use the standard serialize function to serialize the array data
@@ -1651,15 +1646,10 @@ abstract class Collection implements EntityInterface, CollectionInterface, Injec
 		return this->toArray();
 	}
 
-	public function unserialize(var data) -> void
-	{
-		this->__unserialize(unserialize(data));
-	}
-
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function __unserialize(array data) -> void
+	public function __unserialize(data) -> void
 	{
 		var dependencyInjector, manager, key, value;
 

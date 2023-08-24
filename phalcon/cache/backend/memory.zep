@@ -43,7 +43,7 @@ use Phalcon\Cache\Exception;
  * $data = $cache->get("my-data");
  *</code>
  */
-class Memory extends Backend implements \Serializable
+class Memory extends Backend
 {
 
 	protected _data;
@@ -273,30 +273,20 @@ class Memory extends Backend implements \Serializable
 		return true;
 	}
 
-	public function serialize() -> string
-	{
-		return serialize(this->_serialize());
-	}
-
 	/**
 	 * Required for interface \Serializable
 	 */
-	public function _serialize() -> array
+	public function __serialize() -> array
 	{
 		return [
 			"frontend": this->_frontend
 		];
 	}
 
-	public function unserialize(var data) -> void
-	{
-		this->__unserialize(unserialize(data));
-	}
-
 	/**
 	 * Required for interface \Serializable
 	 */
-	public function __unserialize(array data) -> void
+	public function __unserialize(var data) -> void
 	{
 		if typeof data != "array" {
 			throw new \Exception("Unserialized data must be an array");

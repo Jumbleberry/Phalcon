@@ -48,7 +48,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Cache_Backend_Memory)
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Cache\\Backend, Memory, phalcon, cache_backend_memory, phalcon_cache_backend_ce, phalcon_cache_backend_memory_method_entry, 0);
 
 	zend_declare_property_null(phalcon_cache_backend_memory_ce, SL("_data"), ZEND_ACC_PROTECTED);
-	zend_class_implements(phalcon_cache_backend_memory_ce, 1, zend_ce_serializable);
 	return SUCCESS;
 }
 
@@ -563,29 +562,10 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, flush)
 	RETURN_BOOL(1);
 }
 
-PHP_METHOD(Phalcon_Cache_Backend_Memory, serialize)
-{
-	zval _0;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "_serialize", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("serialize", NULL, 13, &_0);
-	zephir_check_call_status();
-	RETURN_MM();
-}
-
 /**
  * Required for interface \Serializable
  */
-PHP_METHOD(Phalcon_Cache_Backend_Memory, _serialize)
+PHP_METHOD(Phalcon_Cache_Backend_Memory, __serialize)
 {
 	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
@@ -603,10 +583,11 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, _serialize)
 	RETURN_MM();
 }
 
-PHP_METHOD(Phalcon_Cache_Backend_Memory, unserialize)
+/**
+ * Required for interface \Serializable
+ */
+PHP_METHOD(Phalcon_Cache_Backend_Memory, __unserialize)
 {
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *data, data_sub, _0;
 	zval *this_ptr = getThis();
 
@@ -620,48 +601,14 @@ PHP_METHOD(Phalcon_Cache_Backend_Memory, unserialize)
 #endif
 
 
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &data);
+	zephir_fetch_params_without_memory_grow(1, 0, &data);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "unserialize", NULL, 14, data);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "__unserialize", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-}
-
-/**
- * Required for interface \Serializable
- */
-PHP_METHOD(Phalcon_Cache_Backend_Memory, __unserialize)
-{
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zval *data_param = NULL, _0;
-	zval data;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&data);
-	ZVAL_UNDEF(&_0);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_ARRAY(data)
-	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &data_param);
-	zephir_get_arrval(&data, data_param);
-
-
-	if (1 != 1) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_ce_exception, "Unserialized data must be an array", "phalcon/cache/backend/memory.zep", 302);
+	if (Z_TYPE_P(data) != IS_ARRAY) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(zend_ce_exception, "Unserialized data must be an array", "phalcon/cache/backend/memory.zep", 292);
 		return;
 	}
-	zephir_array_fetch_string(&_0, &data, SL("frontend"), PH_NOISY | PH_READONLY, "phalcon/cache/backend/memory.zep", 305);
+	zephir_array_fetch_string(&_0, data, SL("frontend"), PH_NOISY | PH_READONLY, "phalcon/cache/backend/memory.zep", 295);
 	zephir_update_property_zval(this_ptr, ZEND_STRL("_frontend"), &_0);
-	ZEPHIR_MM_RESTORE();
 }
 

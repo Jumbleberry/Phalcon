@@ -267,15 +267,10 @@ class Complex extends Resultset implements ResultsetInterface
 		return records;
 	}
 
-	public function serialize() -> string
-	{
-		return serialize(this->_serialize());
-	}
-
 	/**
 	 * Serializing a resultset will dump all related rows into a big array
 	 */
-	public function _serialize() -> array
+	public function __serialize() -> array
 	{
 		var records, cache, columnTypes, hydrateMode, serialized;
 
@@ -298,15 +293,10 @@ class Complex extends Resultset implements ResultsetInterface
 		return serialized;
 	}
 
-	public function unserialize(var data) -> void
-	{
-		this->__unserialize(unserialize(data));
-	}
-
 	/**
 	 * Unserializing a resultset will allow to only works on the rows present in the saved state
 	 */
-	public function __unserialize(array data) -> void
+	public function __unserialize(var data) -> void
 	{
 		/**
 		* Rows are already hydrated

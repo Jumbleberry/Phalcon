@@ -84,7 +84,7 @@ use Phalcon\Events\ManagerInterface as EventsManagerInterface;
  * }
  * </code>
  */
-abstract class Model extends stdClass implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \Serializable, \JsonSerializable
+abstract class Model extends stdClass implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \JsonSerializable
 {
 	protected _dependencyInjector;
 
@@ -4628,15 +4628,10 @@ abstract class Model extends stdClass implements EntityInterface, ModelInterface
 		return typeof relation == "object";
 	}
 
-	public function serialize() -> string
-	{
-		return serialize(this->_serialize());
-	}
-
 	/**
 	 * Serializes the object ignoring connections, services, related objects or static properties
 	 */
-	public function _serialize() -> array
+	public function __serialize() -> array
 	{
 		/**
 		 * Use the standard serialize function to serialize the array data
@@ -4659,15 +4654,10 @@ abstract class Model extends stdClass implements EntityInterface, ModelInterface
 		return attributes;
 	}
 
-	public function unserialize(var data) -> void
-	{
-		this->__unserialize(unserialize(data));
-	}
-
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function __unserialize(array data) -> void
+	public function __unserialize(var data) -> void
 	{
 		var dependencyInjector, manager, key, value, snapshot;
 
