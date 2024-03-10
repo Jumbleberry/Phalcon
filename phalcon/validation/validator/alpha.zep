@@ -70,7 +70,7 @@ class Alpha extends Validator
 
 		let value = validation->getValue(field);
 
-		if preg_match("/[^[:alpha:]]/imu", value) {
+		if preg_match("/[^[:alpha:]]/imu", (string) value) {
 			let label = this->prepareLabel(validation, field),
 				message = this->prepareMessage(validation, field, "Alpha"),
 				code = this->prepareCode(field);

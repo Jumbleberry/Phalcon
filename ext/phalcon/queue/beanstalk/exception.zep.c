@@ -19,11 +19,10 @@
  *
  * Exceptions thrown in Phalcon\Queue\Beanstalk will use this class
  */
-ZEPHIR_INIT_CLASS(Phalcon_Queue_Beanstalk_Exception) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Queue_Beanstalk_Exception)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Queue\\Beanstalk, Exception, phalcon, queue_beanstalk_exception, phalcon_exception_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 

@@ -20,6 +20,7 @@ ext/config.nice
 ext/config.status
 ext/config.sub
 ext/configure
+ext/configure.ac
 ext/configure.in
 ext/install-sh
 ext/libtool
@@ -35,6 +36,7 @@ ext/run-tests.php
 *.la
 *.log
 *.loT
+*.dep
 *.gch
 *.h.ghc
 *.phc
@@ -47,6 +49,9 @@ lemon
 autom4te.cache/
 /vendor/
 ide/
+
+.zephir/
+.temp/
 
 composer.lock
 php_test_results_*.txt

@@ -20,6 +20,7 @@
 
 namespace Phalcon\Mvc;
 
+use stdClass;
 use Phalcon\Di;
 use Phalcon\Db\Column;
 use Phalcon\Db\RawValue;
@@ -83,7 +84,7 @@ use Phalcon\Events\ManagerInterface as EventsManagerInterface;
  * }
  * </code>
  */
-abstract class Model implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \Serializable, \JsonSerializable
+abstract class Model extends stdClass implements EntityInterface, ModelInterface, ResultInterface, InjectionAwareInterface, \JsonSerializable
 {
 	protected _dependencyInjector;
 
@@ -2937,7 +2938,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 							 * Set the related model
 							 */
 							if typeof message == "object" {
-								message->setModel(record);
+								message->setModel(recordAfter);
 							}
 
 							/**
@@ -2989,7 +2990,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 								 * Set the related model
 								 */
 								if typeof message == "object" {
-									message->setModel(record);
+									message->setModel(recordAfter);
 								}
 
 								/**
@@ -4236,7 +4237,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 		/**
 		 * Call the 'getRelationRecords' in the models manager
 		 */
-		return manager->getRelationRecords(relation, null, this, arguments);
+		return manager->getRelationRecords(relation, this, null, arguments);
 	}
 
 	/**
@@ -4282,8 +4283,8 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 
 		return manager->getRelationRecords(
 			relation,
-			queryMethod,
 			this,
+			queryMethod,
 			extraArgs
 		);
 	}
@@ -4571,7 +4572,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			/**
 			 * Get the related records
 			 */
-			let result = manager->getRelationRecords(relation, null, this, null);
+			let result = manager->getRelationRecords(relation, this, null, null);
 
 			/**
 			 * Assign the result to the object
@@ -4630,7 +4631,7 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 	/**
 	 * Serializes the object ignoring connections, services, related objects or static properties
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		/**
 		 * Use the standard serialize function to serialize the array data
@@ -4646,22 +4647,21 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			 * If attributes is not the same as snapshot then save snapshot too
 			 */
 			if snapshot != null && attributes != snapshot {
-				return serialize(["_attributes": attributes, "_snapshot": snapshot]);
+				return ["_attributes": attributes, "_snapshot": snapshot];
 			}
 		}
 
-		return serialize(attributes);
+		return attributes;
 	}
 
 	/**
 	 * Unserializes the object from a serialized string
 	 */
-	public function unserialize(var data)
+	public function __unserialize(var data) -> void
 	{
-		var attributes, dependencyInjector, manager, key, value, snapshot;
+		var dependencyInjector, manager, key, value, snapshot;
 
-		let attributes = unserialize(data);
-		if typeof attributes == "array" {
+		if typeof data == "array" {
 
 			/**
 			 * Obtain the default DI
@@ -4694,19 +4694,19 @@ abstract class Model implements EntityInterface, ModelInterface, ResultInterface
 			 */
 			manager->initialize(this);
 			if manager->isKeepingSnapshots(this) {
-				if fetch snapshot, attributes["_snapshot"] {
+				if fetch snapshot, data["_snapshot"] {
 					let this->_snapshot = snapshot;
-					let attributes = attributes["_attributes"];
+					let data = data["_attributes"];
 				}
 				else {
-					let this->_snapshot = attributes;
+					let this->_snapshot = data;
 				}
 			}
 
 			/**
 			 * Update the objects attributes
 			 */
-			for key, value in attributes {
+			for key, value in data {
 				let this->{key} = value;
 			}
 		}

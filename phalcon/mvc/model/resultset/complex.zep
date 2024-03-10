@@ -62,7 +62,7 @@ class Complex extends Resultset implements ResultsetInterface
 	/**
 	 * Returns current row in the resultset
 	 */
-	public final function current() -> <ModelInterface> | boolean
+	final public function current() -> mixed
 	{
 		var row, hydrateMode, eager,
 			dirtyState, alias, activeRow, type, column, columnValue,
@@ -270,7 +270,7 @@ class Complex extends Resultset implements ResultsetInterface
 	/**
 	 * Serializing a resultset will dump all related rows into a big array
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		var records, cache, columnTypes, hydrateMode, serialized;
 
@@ -283,12 +283,12 @@ class Complex extends Resultset implements ResultsetInterface
 			columnTypes = this->_columnTypes,
 			hydrateMode = this->_hydrateMode;
 
-		let serialized = serialize([
+		let serialized = [
 			"cache"	      : cache,
 			"rows"		  : records,
 			"columnTypes" : columnTypes,
 			"hydrateMode" : hydrateMode
-		]);
+		];
 
 		return serialized;
 	}
@@ -296,24 +296,21 @@ class Complex extends Resultset implements ResultsetInterface
 	/**
 	 * Unserializing a resultset will allow to only works on the rows present in the saved state
 	 */
-	public function unserialize(var data) -> void
+	public function __unserialize(var data) -> void
 	{
-		var resultset;
-
 		/**
 		* Rows are already hydrated
 		*/
 		let this->_disableHydration = true;
 
-		let resultset = unserialize(data);
-		if typeof resultset != "array" {
+		if typeof data != "array" {
 			throw new Exception("Invalid serialization data");
 		}
 
-		let this->_rows = resultset["rows"],
-			this->_count = count(resultset["rows"]),
-			this->_cache = resultset["cache"],
-			this->_columnTypes = resultset["columnTypes"],
-			this->_hydrateMode = resultset["hydrateMode"];
+		let this->_rows = data["rows"],
+			this->_count = count(data["rows"]),
+			this->_cache = data["cache"],
+			this->_columnTypes = data["columnTypes"],
+			this->_hydrateMode = data["hydrateMode"];
 	}
 }

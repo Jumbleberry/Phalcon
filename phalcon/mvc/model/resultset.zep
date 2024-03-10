@@ -69,7 +69,7 @@ use Phalcon\Mvc\Model\ResultsetInterface;
  * </code>
  */
 abstract class Resultset
-	implements ResultsetInterface, \Iterator, \SeekableIterator, \Countable, \ArrayAccess, \Serializable, \JsonSerializable
+	implements ResultsetInterface, \Iterator, \SeekableIterator, \ArrayAccess, \JsonSerializable
 {
 
 	/**
@@ -278,7 +278,7 @@ abstract class Resultset
 	/**
 	 * Checks whether offset exists in the resultset
 	 */
-	public function offsetExists(index) -> boolean
+	public function offsetExists(mixed index) -> bool
 	{
 		return index < this->_count;
 	}
@@ -286,7 +286,7 @@ abstract class Resultset
 	/**
 	 * Gets row in a specific position of the resultset
 	 */
-	public function offsetGet(index) -> <ModelInterface> | boolean
+	public function offsetGet(mixed index) -> mixed
 	{
 		if index < this->_count {
 	   		/**
@@ -306,7 +306,7 @@ abstract class Resultset
 	 * @param int index
 	 * @param \Phalcon\Mvc\ModelInterface value
 	 */
-	public function offsetSet(var index, var value)
+	public function offsetSet(mixed index, mixed value) -> void
 	{
 		throw new Exception("Cursor is an immutable ArrayAccess object");
 	}
@@ -314,7 +314,7 @@ abstract class Resultset
 	/**
 	 * Resultsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 	 */
-	public function offsetUnset(offset)
+	public function offsetUnset(mixed offset) -> void
 	{
 		throw new Exception("Cursor is an immutable ArrayAccess object");
 	}

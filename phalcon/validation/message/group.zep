@@ -55,11 +55,8 @@ class Group implements \Countable, \ArrayAccess, \Iterator
 	 *     $messages[0]
 	 * );
 	 *</code>
-	 *
-	 * @param int index
-	 * @return \Phalcon\Validation\Message
 	 */
-	public function offsetGet(var index) -> <Message> | boolean
+	public function offsetGet(mixed index) -> mixed
 	{
 		var message;
 		if fetch message, this->_messages[index] {
@@ -74,11 +71,8 @@ class Group implements \Countable, \ArrayAccess, \Iterator
 	 *<code>
 	 * $messages[0] = new \Phalcon\Validation\Message("This is a message");
 	 *</code>
-	 *
-	 * @param int index
-	 * @param \Phalcon\Validation\Message message
 	 */
-	public function offsetSet(var index, var message)
+	public function offsetSet(mixed index, mixed message) -> void
 	{
 		if typeof message != "object" {
 			throw new Exception("The message must be an object");
@@ -94,11 +88,8 @@ class Group implements \Countable, \ArrayAccess, \Iterator
 	 *     isset($message["database"])
 	 * );
 	 *</code>
-	 *
-	 * @param int index
-	 * @return boolean
 	 */
-	public function offsetExists(var index) -> boolean
+	public function offsetExists(mixed index) -> bool
 	{
 		return isset this->_messages[index];
 	}
@@ -110,7 +101,7 @@ class Group implements \Countable, \ArrayAccess, \Iterator
 	 * unset($message["database"]);
 	 *</code>
 	 */
-	public function offsetUnset(var index)
+	public function offsetUnset(mixed index) -> void
 	{
 		if isset this->_messages[index] {
 			array_splice(this->_messages, index, 1);

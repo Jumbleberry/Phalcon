@@ -19,6 +19,9 @@
 
 namespace Phalcon\Mvc\Model;
 
+use stdClass;
+use JsonSerializable;
+use ArrayAccess;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Mvc\EntityInterface;
 use Phalcon\Mvc\Model\Exception;
@@ -30,9 +33,8 @@ use Phalcon\Mvc\Model\ResultInterface;
  * This component allows Phalcon\Mvc\Model to return rows without an associated entity.
  * This objects implements the ArrayAccess interface to allow access the object as object->x or array[x].
  */
-class Row implements EntityInterface, ResultInterface, \ArrayAccess, \JsonSerializable
+class Row extends stdClass implements ArrayAccess, EntityInterface, ResultInterface, JsonSerializable
 {
-
 	/**
 	 * Set the current object's state
 	 */
@@ -42,48 +44,38 @@ class Row implements EntityInterface, ResultInterface, \ArrayAccess, \JsonSerial
 	}
 
 	/**
+	 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 	 * Checks whether offset exists in the row
-	 *
-	 * @param string|int $index
-	 * @return boolean
 	 */
-	public function offsetExists(var index) -> boolean
+	public function offsetExists(mixed index) -> bool
 	{
 		return isset this->{index};
 	}
 
 	/**
 	 * Gets a record in a specific position of the row
-	 *
-	 * @param string|int index
-	 * @return string|Phalcon\Mvc\ModelInterface
 	 */
-	public function offsetGet(var index)
+	public function offsetGet(mixed index) -> mixed
 	{
-		var value;
-		if fetch value, this->{index} {
-			return value;
-		}
-		throw new Exception("The index does not exist in the row");
+		if !this->offsetExists(index) {
+            throw new Exception("The index does not exist in the row");
+        }
+
+        return this->{index};
 	}
 
 	/**
 	 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
-	 *
-	 * @param string|int index
-	 * @param \Phalcon\Mvc\ModelInterface value
 	 */
-	public function offsetSet(var index, var value)
+	public function offsetSet(mixed element, mixed value) -> void
 	{
 		throw new Exception("Row is an immutable ArrayAccess object");
 	}
 
 	/**
 	 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
-	 *
-	 * @param string|int offset
 	 */
-	public function offsetUnset(offset)
+	public function offsetUnset(mixed element) -> void
 	{
 		throw new Exception("Row is an immutable ArrayAccess object");
 	}
@@ -132,13 +124,13 @@ class Row implements EntityInterface, ResultInterface, \ArrayAccess, \JsonSerial
 		return get_object_vars(this);
 	}
 
-    /**
-    * Serializes the object for json_encode
-    *
-    * @return array
-    */
+	/**
+	 * Serializes the object for json_encode
+	 *
+	 * @return array
+	 */
 	public function jsonSerialize() -> array
 	{
-	    return this->toArray();
+		return this->toArray();
 	}
 }

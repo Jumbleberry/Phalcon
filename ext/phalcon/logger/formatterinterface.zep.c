@@ -17,12 +17,11 @@
  *
  * This interface must be implemented by formatters in Phalcon\Logger
  */
-ZEPHIR_INIT_CLASS(Phalcon_Logger_FormatterInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Logger_FormatterInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Logger, FormatterInterface, phalcon, logger_formatterinterface, phalcon_logger_formatterinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
@@ -34,4 +33,3 @@ ZEPHIR_INIT_CLASS(Phalcon_Logger_FormatterInterface) {
  * @param array $context
  */
 ZEPHIR_DOC_METHOD(Phalcon_Logger_FormatterInterface, format);
-

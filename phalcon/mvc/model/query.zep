@@ -2796,7 +2796,7 @@ class Query implements QueryInterface, InjectionAwareInterface
 		if result instanceof ResultInterface && result->numRows() {
 			let resultData = result;
 		} else {
-			let resultData = false;
+			let resultData = null;
 		}
 
 		/**

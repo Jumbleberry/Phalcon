@@ -17,12 +17,11 @@
  *
  * Interface for the Phalcon\Validation component
  */
-ZEPHIR_INIT_CLASS(Phalcon_ValidationInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_ValidationInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon, ValidationInterface, phalcon, validationinterface, phalcon_validationinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
@@ -33,22 +32,18 @@ ZEPHIR_INIT_CLASS(Phalcon_ValidationInterface) {
  * @return \Phalcon\Validation\Message\Group
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, validate);
-
 /**
  * Adds a validator to a field
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, add);
-
 /**
  * Alias of `add` method
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, rule);
-
 /**
  * Adds the validators to a field
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, rules);
-
 /**
  * Adds filters to the field
  *
@@ -57,7 +52,6 @@ ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, rules);
  * @return \Phalcon\Validation
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, setFilters);
-
 /**
  * Returns all the filters or a specific one
  *
@@ -65,41 +59,34 @@ ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, setFilters);
  * @return mixed
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getFilters);
-
 /**
  * Returns the validators added to the validation
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getValidators);
-
 /**
  * Returns the bound entity
  *
  * @return object
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getEntity);
-
 /**
  * Adds default messages to validators
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, setDefaultMessages);
-
 /**
  * Get default message for validator type
  *
  * @param string type
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getDefaultMessage);
-
 /**
  * Returns the registered validators
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getMessages);
-
 /**
  * Adds labels for fields
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, setLabels);
-
 /**
  * Get label for field
  *
@@ -107,12 +94,10 @@ ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, setLabels);
  * @return string
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getLabel);
-
 /**
  * Appends a message to the messages list
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, appendMessage);
-
 /**
  * Assigns the data to an entity
  * The entity is used to obtain the validation values
@@ -122,7 +107,6 @@ ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, appendMessage);
  * @return \Phalcon\Validation
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, bind);
-
 /**
  * Gets the a value to validate in the array/object data source
  *
@@ -130,4 +114,3 @@ ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, bind);
  * @return mixed
  */
 ZEPHIR_DOC_METHOD(Phalcon_ValidationInterface, getValue);
-

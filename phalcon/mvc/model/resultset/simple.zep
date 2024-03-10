@@ -64,7 +64,7 @@ class Simple extends Resultset
 	/**
 	 * Returns current row in the resultset
 	 */
-	public final function current() -> <ModelInterface> | boolean
+	final public function current() -> mixed
 	{
 		var row, hydrateMode, columnMap, activeRow, modelName;
 
@@ -225,41 +225,40 @@ class Simple extends Resultset
 	/**
 	 * Serializing a resultset will dump all related rows into a big array
 	 */
-	public function serialize() -> string
+	public function __serialize() -> array
 	{
 		/**
 		 * Serialize the cache using the serialize function
 		 */
-		return serialize([
+		return [
 			"model"         : this->_model,
 			"cache"         : this->_cache,
 			"rows"          : this->toArray(false),
 			"columnMap"     : this->_columnMap,
 			"hydrateMode"   : this->_hydrateMode,
 			"keepSnapshots" : this->_keepSnapshots
-		]);
+		];
 	}
 
 	/**
 	 * Unserializing a resultset will allow to only works on the rows present in the saved state
 	 */
-	public function unserialize(var data) -> void
+	public function __unserialize(var data) -> void
 	{
-		var resultset, keepSnapshots;
+		var keepSnapshots;
 
-		let resultset = unserialize(data);
-		if typeof resultset != "array" {
+		if typeof data != "array" {
 			throw new Exception("Invalid serialization data");
 		}
 
-		let this->_model = resultset["model"],
-			this->_rows = resultset["rows"],
-			this->_count = count(resultset["rows"]),
-			this->_cache = resultset["cache"],
-			this->_columnMap = resultset["columnMap"],
-			this->_hydrateMode = resultset["hydrateMode"];
+		let this->_model = data["model"],
+			this->_rows = data["rows"],
+			this->_count = count(data["rows"]),
+			this->_cache = data["cache"],
+			this->_columnMap = data["columnMap"],
+			this->_hydrateMode = data["hydrateMode"];
 
-		if fetch keepSnapshots, resultset["keepSnapshots"] {
+		if fetch keepSnapshots, data["keepSnapshots"] {
 		    let this->_keepSnapshots = keepSnapshots;
 		}
 	}

@@ -20,12 +20,11 @@
  * @deprecated 3.1.0
  * @see Phalcon\Validation\ValidatorInterface
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_ValidatorInterface) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_ValidatorInterface)
+{
 	ZEPHIR_REGISTER_INTERFACE(Phalcon\\Mvc\\Model, ValidatorInterface, phalcon, mvc_model_validatorinterface, phalcon_mvc_model_validatorinterface_method_entry);
 
 	return SUCCESS;
-
 }
 
 /**
@@ -34,7 +33,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Mvc_Model_ValidatorInterface) {
  * @return array
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ValidatorInterface, getMessages);
-
 /**
  * Executes the validator
  *
@@ -42,4 +40,3 @@ ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ValidatorInterface, getMessages);
  * @return boolean
  */
 ZEPHIR_DOC_METHOD(Phalcon_Mvc_Model_ValidatorInterface, validate);
-

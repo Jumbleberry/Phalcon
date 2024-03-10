@@ -255,9 +255,9 @@ class Bag implements InjectionAwareInterface, BagInterface, \IteratorAggregate, 
 	 * unset($user["name"]);
 	 *</code>
 	 */
-	public function __unset(string! property) -> boolean
+	public function __unset(string! property) -> void
 	{
-		return this->remove(property);
+		this->remove(property);
 	}
 
 	/**
@@ -287,22 +287,22 @@ class Bag implements InjectionAwareInterface, BagInterface, \IteratorAggregate, 
 		return new \ArrayIterator(this->_data);
 	}
 
-	public final function offsetSet(var property, var value)
+	public final function offsetSet(mixed property, mixed value) -> void
 	{
-		return this->set(property, value);
+		this->set(property, value);
 	}
 
-	public final function offsetExists(var property) -> boolean
+	public final function offsetExists(mixed property) -> bool
 	{
 		return this->has(property);
 	}
 
-	public final function offsetUnset(var property)
+	public final function offsetUnset(mixed property) -> void
 	{
-		return this->remove(property);
+		this->remove(property);
 	}
 
-	public final function offsetGet(var property) -> var
+	public final function offsetGet(mixed property) -> mixed
 	{
 		return this->get(property);
 	}

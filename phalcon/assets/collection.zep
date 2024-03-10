@@ -230,7 +230,7 @@ class Collection implements \Countable, \Iterator
 	 *
 	 * @return int
 	 */
-	public function key()
+	public function key() -> mixed
 	{
 		return this->_position;
 	}

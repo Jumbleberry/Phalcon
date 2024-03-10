@@ -101,9 +101,9 @@ class StringLength extends Validator
 
 		// Check if mbstring is available to calculate the correct length
 		if function_exists("mb_strlen") {
-			let length = mb_strlen(value);
+			let length = mb_strlen((string) value);
 		} else {
-			let length = strlen(value);
+			let length = strlen((string) value);
 		}
 
 		/**

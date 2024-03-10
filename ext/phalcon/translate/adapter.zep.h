@@ -17,39 +17,45 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter___construct, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, options, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_setinterpolator, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_translate_adapter_setinterpolator, 0, 1, Phalcon\\Translate\\Adapter, 0)
 	ZEND_ARG_OBJ_INFO(0, interpolator, Phalcon\\Translate\\InterpolatorInterface, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_t, 0, 0, 1)
-	ZEND_ARG_INFO(0, translateKey)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_t, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, translateKey, IS_STRING, 0)
 	ZEND_ARG_INFO(0, placeholders)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter__, 0, 0, 1)
-	ZEND_ARG_INFO(0, translateKey)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter__, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, translateKey, IS_STRING, 0)
 	ZEND_ARG_INFO(0, placeholders)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_offsetset, 0, 0, 2)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_offsetset, 0, 2, IS_VOID, 0)
+
 	ZEND_ARG_INFO(0, offset)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_offsetexists, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_offsetexists, 0, 1, _IS_BOOL, 0)
 	ZEND_ARG_INFO(0, translateKey)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_offsetunset, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_offsetunset, 0, 1, IS_VOID, 0)
+
 	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
+#if PHP_VERSION_ID >= 80000
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_offsetget, 0, 1, IS_MIXED, 0)
+#else
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_offsetget, 0, 0, 1)
+#endif
 	ZEND_ARG_INFO(0, translateKey)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_translate_adapter_replaceplaceholders, 0, 0, 1)
-	ZEND_ARG_INFO(0, translation)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_translate_adapter_replaceplaceholders, 0, 1, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, translation, IS_STRING, 0)
 	ZEND_ARG_INFO(0, placeholders)
 ZEND_END_ARG_INFO()
 

@@ -25,7 +25,7 @@ namespace Phalcon\Mvc\Model;
  * Interface for Phalcon\Mvc\Model\Resultset
  *
  */
-interface ResultsetInterface
+interface ResultsetInterface extends \Countable
 {
 
 	/**
@@ -69,4 +69,9 @@ interface ResultsetInterface
 	 * it could consume more memory than currently it does.
 	 */
 	public function toArray() -> array;
+
+	/**
+	 * Counts how many rows are in the resultset
+	 */
+	public function count() -> int;
 }

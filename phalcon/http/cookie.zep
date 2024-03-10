@@ -573,7 +573,7 @@ class Cookie implements CookieInterface, InjectionAwareInterface
 	{
 		var length;
 
-		let length = mb_strlen(signKey);
+		let length = mb_strlen((string) signKey);
 		if length < 32 {
 			throw new CookieException(
 				sprintf(

@@ -20,11 +20,10 @@
  * This class can be used to provide user plugins an easy access to services
  * in the application
  */
-ZEPHIR_INIT_CLASS(Phalcon_Mvc_User_Plugin) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Mvc_User_Plugin)
+{
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Mvc\\User, Plugin, phalcon, mvc_user_plugin, phalcon_di_injectable_ce, NULL, 0);
 
 	return SUCCESS;
-
 }
 

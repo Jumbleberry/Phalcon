@@ -13,25 +13,33 @@
 
 #include "kernel/main.h"
 #include "kernel/memory.h"
+#include "kernel/object.h"
 
 
-ZEPHIR_INIT_CLASS(phalcon_0__closure) {
-
+ZEPHIR_INIT_CLASS(phalcon_0__closure)
+{
 	ZEPHIR_REGISTER_CLASS(phalcon, 0__closure, phalcon, 0__closure, phalcon_0__closure_method_entry, ZEND_ACC_FINAL_CLASS);
 
 	return SUCCESS;
-
 }
 
-PHP_METHOD(phalcon_0__closure, __invoke) {
+PHP_METHOD(phalcon_0__closure, __invoke)
+{
+	zval *file, file_sub;
+	zval *this_ptr = getThis();
 
-	zval *file;
+	ZVAL_UNDEF(&file_sub);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_ZVAL(file)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
 
-	zephir_fetch_params(0, 1, 0, &file);
 
+	zephir_fetch_params_without_memory_grow(1, 0, &file);
 
 
 	RETURN_BOOL(1);
-
 }
 

@@ -15,16 +15,20 @@
 
 
 /**
- * Phalcon\Config\Exception
+ * This file is part of the Phalcon Framework.
  *
- * Exceptions thrown in Phalcon\Config will use this class
+ * (c) Phalcon Team <team@phalcon.io>
  *
+ * For the full copyright and license information, please view the LICENSE.txt
+ * file that was distributed with this source code.
  */
-ZEPHIR_INIT_CLASS(Phalcon_Config_Exception) {
-
-	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Config, Exception, phalcon, config_exception, phalcon_exception_ce, NULL, 0);
+/**
+ * Exceptions thrown in Phalcon\Config will use this class
+ */
+ZEPHIR_INIT_CLASS(Phalcon_Config_Exception)
+{
+	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Config, Exception, phalcon, config_exception, zend_ce_exception, NULL, 0);
 
 	return SUCCESS;
-
 }
 

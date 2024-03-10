@@ -8,56 +8,23 @@
 #define ZEPHIR_RELEASE 1
 #endif
 
-
-/*
-  +------------------------------------------------------------------------+
-  | Zephir Language                                                        |
-  +------------------------------------------------------------------------+
-  | Copyright (c) 2011-2017 Zephir Team (http://www.zephir-lang.com)       |
-  +------------------------------------------------------------------------+
-  | This source file is subject to the New BSD License that is bundled     |
-  | with this package in the file docs/LICENSE.txt.                        |
-  |                                                                        |
-  | If you did not receive a copy of the license and are unable to         |
-  | obtain it through the world-wide-web, please send an email             |
-  | to license@zephir-lang.com so we can send you a copy immediately.      |
-  +------------------------------------------------------------------------+
-  | Authors: Andres Gutierrez <andres@zephir-lang.com>                     |
-  |          Eduar Carvajal <eduar@zephir-lang.com>                        |
-  |          Vladimir Kolesnikov <vladimir@extrememember.com>              |
-  +------------------------------------------------------------------------+
-*/
+/**
+ * This file is part of the Zephir.
+ *
+ * (c) Phalcon Team <team@zephir-lang.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code. If you did not receive
+ * a copy of the license it is available through the world-wide-web at the
+ * following url: https://docs.zephir-lang.com/en/latest/license
+ */
 
 #ifndef ZEPHIR_KERNEL_GLOBALS_H
 #define ZEPHIR_KERNEL_GLOBALS_H
 
 #include <php.h>
 
-#define ZEPHIR_MAX_MEMORY_STACK 48
 #define ZEPHIR_MAX_CACHE_SLOTS 512
-
-/** Memory frame */
-typedef struct _zephir_memory_entry {
-	size_t pointer;
-	size_t capacity;
-	zval **addresses;
-	size_t hash_pointer;
-	size_t hash_capacity;
-	zval **hash_addresses;
-	struct _zephir_memory_entry *prev;
-	struct _zephir_memory_entry *next;
-#ifndef ZEPHIR_RELEASE
-	int permanent;
-	const char *func;
-#endif
-} zephir_memory_entry;
-
-/** Virtual Symbol Table */
-typedef struct _zephir_symbol_table {
-	struct _zephir_memory_entry *scope;
-	zend_array *symbol_table;
-	struct _zephir_symbol_table *prev;
-} zephir_symbol_table;
 
 typedef struct _zephir_function_cache {
 	zend_class_entry *ce;
@@ -128,6 +95,10 @@ typedef zend_function zephir_fcall_cache_entry;
 #define likely(x)   EXPECTED(x)
 #define unlikely(x) UNEXPECTED(x)
 
+#ifndef ZEND_ACC_DTOR
+ #define ZEND_ACC_DTOR 0
+#endif
+
 #endif
 
 
@@ -135,7 +106,7 @@ typedef zend_function zephir_fcall_cache_entry;
 #define PHP_PHALCON_VERSION     "3.4.5"
 #define PHP_PHALCON_EXTNAME     "phalcon"
 #define PHP_PHALCON_AUTHOR      "Phalcon Team and contributors"
-#define PHP_PHALCON_ZEPVERSION  "0.10.16-6826149172"
+#define PHP_PHALCON_ZEPVERSION  "0.17.0-9f99da6"
 #define PHP_PHALCON_DESCRIPTION "Web framework delivered as a C-extension for PHP"
 
 typedef struct _zephir_struct_db { 
@@ -168,14 +139,6 @@ ZEND_BEGIN_MODULE_GLOBALS(phalcon)
 
 	int initialized;
 
-	/* Memory */
-	zephir_memory_entry *start_memory; /**< The first preallocated frame */
-	zephir_memory_entry *end_memory; /**< The last preallocate frame */
-	zephir_memory_entry *active_memory; /**< The current memory frame */
-
-	/* Virtual Symbol Tables */
-	zephir_symbol_table *active_symbol_table;
-
 	/** Function cache */
 	HashTable *fcache;
 
@@ -189,9 +152,7 @@ ZEND_BEGIN_MODULE_GLOBALS(phalcon)
 
 	
 	zephir_struct_db db;
-
 	zephir_struct_orm orm;
-
 
 ZEND_END_MODULE_GLOBALS(phalcon)
 
@@ -208,7 +169,7 @@ ZEND_EXTERN_MODULE_GLOBALS(phalcon)
 #endif
 
 #ifdef ZTS
-	void ***tsrm_ls;
+	ZEND_TSRMLS_CACHE_EXTERN()
 	#define ZEPHIR_VGLOBAL ((zend_phalcon_globals *) (*((void ***) tsrm_get_ls_cache()))[TSRM_UNSHUFFLE_RSRC_ID(phalcon_globals_id)])
 #else
 	#define ZEPHIR_VGLOBAL &(phalcon_globals)

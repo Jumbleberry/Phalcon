@@ -36,7 +36,7 @@ class Document implements EntityInterface, \ArrayAccess
 	 * @param int index
 	 * @return boolean
 	 */
-	public function offsetExists(var index) -> boolean
+	public function offsetExists(mixed index) -> bool
 	{
 		return isset this->{index};
 	}
@@ -44,7 +44,7 @@ class Document implements EntityInterface, \ArrayAccess
 	/**
 	 * Returns the value of a field using the ArrayAccess interfase
 	 */
-	public function offsetGet(var index)
+	public function offsetGet(var index) -> mixed
 	{
 		var value;
 		if fetch value, this->{index} {
@@ -56,7 +56,7 @@ class Document implements EntityInterface, \ArrayAccess
 	/**
 	 * Change a value using the ArrayAccess interface
 	 */
-	public function offsetSet(var index, value) -> void
+	public function offsetSet(mixed index, mixed value) -> void
 	{
 		let this->{index} = value;
 	}
@@ -66,7 +66,7 @@ class Document implements EntityInterface, \ArrayAccess
 	 *
 	 * @param string offset
 	 */
-	public function offsetUnset(offset)
+	public function offsetUnset(mixed offset) -> void
 	{
 		throw new Exception("The index does not exist in the row");
 	}

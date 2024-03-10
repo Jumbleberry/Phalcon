@@ -170,7 +170,11 @@ class Filter implements FilterInterface
 
 			case Filter::FILTER_STRING:
 
-				return filter_var(value, FILTER_SANITIZE_STRING);
+				if (PHP_MAJOR_VERSION < 8 || (PHP_MAJOR_VERSION === 8 && PHP_MINOR_VERSION === 0)) {
+					return filter_var(value, 513);
+				}
+
+				return value;
 
 			case Filter::FILTER_FLOAT:
 				/**

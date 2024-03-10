@@ -20,11 +20,10 @@
  * Translate component allows the creation of multi-language applications using
  * different adapters for translation lists.
  */
-ZEPHIR_INIT_CLASS(Phalcon_Translate) {
-
+ZEPHIR_INIT_CLASS(Phalcon_Translate)
+{
 	ZEPHIR_REGISTER_CLASS(Phalcon, Translate, phalcon, translate, NULL, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
 
 	return SUCCESS;
-
 }
 
