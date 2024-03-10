@@ -2938,7 +2938,7 @@ abstract class Model extends stdClass implements EntityInterface, ModelInterface
 							 * Set the related model
 							 */
 							if typeof message == "object" {
-								message->setModel(record);
+								message->setModel(recordAfter);
 							}
 
 							/**
@@ -2990,7 +2990,7 @@ abstract class Model extends stdClass implements EntityInterface, ModelInterface
 								 * Set the related model
 								 */
 								if typeof message == "object" {
-									message->setModel(record);
+									message->setModel(recordAfter);
 								}
 
 								/**
